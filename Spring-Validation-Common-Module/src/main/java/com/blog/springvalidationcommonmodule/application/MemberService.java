@@ -23,6 +23,7 @@ public class MemberService {
         if(memberRepository.findByEmail(memberRequestDto.getEmail()).isPresent()) {
             throw new ValidCustomException("이미 사용중인 이메일 주소입니다.","email");
         }
+
         return memberRepository.save(memberRequestDto.toEntity()).getId();
     }
 

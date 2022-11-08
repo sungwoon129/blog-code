@@ -97,6 +97,7 @@
 
     var markingErrorField = function (response) {
         const errorFields = response.responseJSON.errors;
+        console.log(errorFields)
 
         if(!errorFields){
             alert(response.response.message);

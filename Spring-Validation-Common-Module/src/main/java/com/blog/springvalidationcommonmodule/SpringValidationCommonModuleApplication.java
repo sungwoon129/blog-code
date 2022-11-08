@@ -20,9 +20,7 @@ public class SpringValidationCommonModuleApplication {
         return new DefaultErrorAttributes() {
 
             @Override
-            public Map<String, Object> getErrorAttributes(
-                    WebRequest requestAttributes,
-                    ErrorAttributeOptions options) {
+            public Map<String, Object> getErrorAttributes(WebRequest requestAttributes, ErrorAttributeOptions options) {
                 Map<String, Object> errorAttributes = super.getErrorAttributes(requestAttributes, options);
                 Throwable error = getError(requestAttributes);
                 if (error instanceof ValidCustomException) {
