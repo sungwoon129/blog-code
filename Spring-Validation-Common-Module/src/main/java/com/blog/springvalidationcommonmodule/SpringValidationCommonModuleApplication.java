@@ -15,7 +15,7 @@ import java.util.Map;
 public class SpringValidationCommonModuleApplication {
 
 
-    @Bean
+    /*@Bean
     public ErrorAttributes errorAttributes() {
         return new DefaultErrorAttributes() {
 
@@ -30,7 +30,7 @@ public class SpringValidationCommonModuleApplication {
             }
 
         };
-    }
+    }*/
 
     public static void main(String[] args) {
         SpringApplication.run(SpringValidationCommonModuleApplication.class, args);

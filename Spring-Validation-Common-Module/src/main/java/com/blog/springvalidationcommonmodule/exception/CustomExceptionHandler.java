@@ -12,13 +12,13 @@ import java.util.Map;
 @RestControllerAdvice
 public class CustomExceptionHandler {
 
-    /*@ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler(ValidCustomException.class)
     public Map<String, Object> validCustomExceptionHandler(ValidCustomException e) {
         Map<String,Object> errorAttributes = new HashMap<>();
         errorAttributes.put("errors",e.getErrors());
 
         return errorAttributes;
-    }*/
+    }
 
 }
