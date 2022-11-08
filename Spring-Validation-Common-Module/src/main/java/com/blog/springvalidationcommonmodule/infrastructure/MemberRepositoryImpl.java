@@ -4,6 +4,7 @@ import com.blog.springvalidationcommonmodule.domain.Member;
 import com.blog.springvalidationcommonmodule.domain.MemberRepository;
 import com.blog.springvalidationcommonmodule.presentation.dto.MemberResponseDto;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;

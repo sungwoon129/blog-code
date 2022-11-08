@@ -34,8 +34,8 @@ public class MemberRequestDto {
         String[] phones = new String[3];
         int mid = phoneNumber.length() == 10? 7:8;
         phones[0] = phoneNumber.substring(0,3);
-        phones[1] = phoneNumber.substring(4,mid);
-        phones[2] = phoneNumber.substring(mid,phoneNumber.length() - 1);
+        phones[1] = phoneNumber.substring(3,mid - 1);
+        phones[2] = phoneNumber.substring(mid - 1);
 
         return phones;
     }

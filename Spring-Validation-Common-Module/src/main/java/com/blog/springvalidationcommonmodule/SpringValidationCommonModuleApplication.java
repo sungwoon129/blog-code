@@ -3,10 +3,11 @@ package com.blog.springvalidationcommonmodule;
 import com.blog.springvalidationcommonmodule.exception.ValidCustomException;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.autoconfigure.web.DefaultErrorAttributes;
-import org.springframework.boot.autoconfigure.web.ErrorAttributes;
+import org.springframework.boot.web.error.ErrorAttributeOptions;
+import org.springframework.boot.web.servlet.error.DefaultErrorAttributes;
+import org.springframework.boot.web.servlet.error.ErrorAttributes;
 import org.springframework.context.annotation.Bean;
-import org.springframework.web.context.request.RequestAttributes;
+import org.springframework.web.context.request.WebRequest;
 
 import java.util.Map;
 
@@ -20,9 +21,9 @@ public class SpringValidationCommonModuleApplication {
 
             @Override
             public Map<String, Object> getErrorAttributes(
-                    RequestAttributes requestAttributes,
-                    boolean includeStackTrace) {
-                Map<String, Object> errorAttributes = super.getErrorAttributes(requestAttributes, includeStackTrace);
+                    WebRequest requestAttributes,
+                    ErrorAttributeOptions options) {
+                Map<String, Object> errorAttributes = super.getErrorAttributes(requestAttributes, options);
                 Throwable error = getError(requestAttributes);
                 if (error instanceof ValidCustomException) {
                     errorAttributes.put("errors", ((ValidCustomException)error).getErrors());

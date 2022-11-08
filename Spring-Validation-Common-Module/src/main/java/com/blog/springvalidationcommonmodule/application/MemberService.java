@@ -1,6 +1,7 @@
 package com.blog.springvalidationcommonmodule.application;
 
 import com.blog.springvalidationcommonmodule.domain.MemberRepository;
+import com.blog.springvalidationcommonmodule.exception.ValidCustomException;
 import com.blog.springvalidationcommonmodule.infrastructure.MemberRepositoryImpl;
 import com.blog.springvalidationcommonmodule.presentation.dto.MemberRequestDto;
 import com.blog.springvalidationcommonmodule.presentation.dto.MemberResponseDto;
@@ -19,6 +20,9 @@ public class MemberService {
 
     @Transactional
     public Long save(MemberRequestDto memberRequestDto) {
+        if(memberRepository.findByEmail(memberRequestDto.getEmail()).isPresent()) {
+            throw new ValidCustomException("이미 사용중인 이메일 주소입니다.","email");
+        }
         return memberRepository.save(memberRequestDto.toEntity()).getId();
     }
 
