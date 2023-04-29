@@ -1,6 +1,6 @@
-package sort;
+package algorithm.sort;
 
-import common.Algorithm;
+import algorithm.sort.common.Algorithm;
 
 public class BubbleSort extends SortAlgorithm implements Algorithm {
 

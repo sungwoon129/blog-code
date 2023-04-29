@@ -1,4 +1,4 @@
-package common;
+package algorithm.sort.common;
 
 public interface Algorithm {
     default void run() {
