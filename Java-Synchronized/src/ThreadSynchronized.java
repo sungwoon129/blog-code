@@ -15,14 +15,13 @@ public class ThreadSynchronized {
 
 class Task implements Runnable {
 
-    Account acc = Account.getInstance();
-    Account acc2 = Account.getInstance();
+    Account acc = new Account();
 
     @Override
     public void run() {
         while (acc.balance > 0 ) {
             int money = (int) (Math.random() * 3 + 1) * 100;
-            acc2.withdraw(money);
+            acc.withdraw(money);
         }
 
     }
@@ -32,16 +31,8 @@ class Account {
 
     int balance;
 
-    private Account() {
+    public Account() {
         this.balance = 1000;
-    }
-
-    private static class SingletonAccount {
-        private static final Account INSTANCE = new Account();
-    }
-
-    public static Account getInstance() {
-        return SingletonAccount.INSTANCE;
     }
 
     public synchronized void withdraw(int money) {
