@@ -215,3 +215,8 @@ synchronized 키워드 옆의 소괄호 안에는 동기화 할(접근을 막을
 이렇게 <b> synchronized </b>키워드를 활용해 thread-safe한 코드를 작성하는 방법을 알아보았습니다.
 synchronized는 스레드간의 간섭을 막아주는 용도로 유용하게 활용할 수 있지만, 다른 스레드의 접근을 제어하기 때문에 성능을 크게
 떨어뜨릴 수 있습니다. 꼭 필요한 경우에만 사용하고, 가능하다면 블록을 활용하여 적용되는 범위를 제한하는 것이 좋습니다.
+
+### 5.참조 사이트 ###
+
++ https://coding-start.tistory.com/68
++ https://readystory.tistory.com/116
