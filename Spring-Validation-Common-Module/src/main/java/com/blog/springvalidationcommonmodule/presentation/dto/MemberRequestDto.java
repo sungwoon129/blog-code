@@ -1,6 +1,8 @@
 package com.blog.springvalidationcommonmodule.presentation.dto;
 
 import com.blog.springvalidationcommonmodule.domain.Member;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -8,7 +10,9 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
 
+@Builder
 @Getter
+@AllArgsConstructor
 @NoArgsConstructor
 public class MemberRequestDto {
 
