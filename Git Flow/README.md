@@ -12,3 +12,8 @@
 이전하고 유지보수를 위해 전체적인 소스코드 관리의 필요성을 느끼게 되어 찾아보고 공부하여 회사에 GIT FLOW를 도입하자는 제안을 위해 
 작성한 ppt입니다.
 
+
+
+> ### <b> 사용한 ppt 글꼴 </b> <br />    
+> + [G마켓 산스 TTF Bold](https://corp.gmarket.com/fonts/)     
+> + [나눔스퀘어 Light](https://hangeul.naver.com/font)
