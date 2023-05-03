@@ -1,6 +1,7 @@
 package com.blog.springvalidationcommonmodule.presentation;
 
 import com.blog.springvalidationcommonmodule.application.MemberService;
+import com.blog.springvalidationcommonmodule.exception.ValidCustomException;
 import com.blog.springvalidationcommonmodule.presentation.dto.MemberRequestDto;
 import com.blog.springvalidationcommonmodule.presentation.dto.MemberResponseDto;
 import lombok.RequiredArgsConstructor;
@@ -20,6 +21,7 @@ public class MemberController {
 
     @PostMapping("/member")
     public Long saveMember(@RequestBody @Valid MemberRequestDto memberRequestDto) {
+
         return memberService.save(memberRequestDto);
     }
 

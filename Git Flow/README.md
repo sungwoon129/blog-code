@@ -14,8 +14,7 @@
 
 <br />
 <br />
-<br />
-<br />
+
 
 > ### <b> 사용한 ppt 글꼴 </b> <br />    
 > + [G마켓 산스 TTF Bold](https://corp.gmarket.com/fonts/)     
