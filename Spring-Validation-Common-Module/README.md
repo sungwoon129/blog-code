@@ -107,6 +107,7 @@ Bean Validator의 구현체인 Hibernate Validator의 레퍼런스 가이드에 
 시간이 많이 걸리고 오류를 일으키기 쉽다.
 </i> 
 
+
 처음에 if문을 사용해서 구현했을 때 발견한 문제와 동일한 내용을 이야기하고 있습니다.
 
 ![image](https://user-images.githubusercontent.com/43958570/235891734-4d3391d9-8aa9-4d2d-afcf-c67be104419d.png)
