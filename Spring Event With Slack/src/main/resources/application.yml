@@ -1,0 +1,10 @@
+
+slack:
+  token: xoxb-880556168306-5248346736672-RVEAVJuflQzKMFzKXgwPYWtC
+  channel:
+    monitor: '#study'
+
+spring:
+  datasource:
+    driver-class-name: org.h2.Driver
+    url: jdbc:h2:mem:testdb
