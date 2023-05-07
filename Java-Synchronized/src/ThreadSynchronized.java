@@ -1,3 +1,5 @@
+
+
 public class ThreadSynchronized {
     public static void main(String[] args) {
 
