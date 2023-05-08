@@ -1,21 +1,24 @@
 package com.blog.spring_event_with_slack.spring_event_with_slack.common.model;
 
+import lombok.Getter;
+
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
 
+@Getter
 @Embeddable
 public class Address {
 
-    @Column
+    @Column(name = "zipCode")
     private String zipCode;
 
-    @Column
+    @Column(name = "address1")
     private String address1;
 
-    @Column
+    @Column(name = "address2")
     private String address2;
 
-    protected Address() {
+    public Address() {
     }
 
     public Address(String zipCode, String address1, String address2) {
