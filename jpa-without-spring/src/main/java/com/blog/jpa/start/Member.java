@@ -2,26 +2,47 @@ package com.blog.jpa.start;
 
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "MEMBER")
+@Table(name = "MEMBER", uniqueConstraints = { @UniqueConstraint(
+        name = "NAME_AGE_UNIQUE",
+        columnNames = {"NAME", "AGE"}
+)})
 public class Member {
 
     @Id
     @Column(name = "ID")
     private String id;
 
-    @Column(name = "NAME")
+    @Column(name = "NAME", nullable = false, length = 10)
     private String username;
 
     @Column(name = "AGE")
     private Integer age;
 
+    @Enumerated(EnumType.STRING)
+    private RoleType roleType;
 
-    public Member(String id, String username, Integer age) {
+    @Column
+    private LocalDateTime createdDate;
+
+    @Column
+    private LocalDateTime lastModifiedDate;
+
+    @Lob
+    private String description;
+
+
+
+    public Member(String id, String username, Integer age, RoleType roleType, LocalDateTime createdDate, LocalDateTime lastModifiedDate, String description) {
         this.id = id;
         this.username = username;
         this.age = age;
+        this.roleType = roleType;
+        this.createdDate = createdDate;
+        this.lastModifiedDate = lastModifiedDate;
+        this.description = description;
     }
 
     public Member() {
@@ -50,5 +71,21 @@ public class Member {
 
     public void setAge(Integer age) {
         this.age = age;
+    }
+
+    public RoleType getRoleType() {
+        return roleType;
+    }
+
+    public LocalDateTime getCreatedDate() {
+        return createdDate;
+    }
+
+    public LocalDateTime getLastModifiedDate() {
+        return lastModifiedDate;
+    }
+
+    public String getDescription() {
+        return description;
     }
 }
