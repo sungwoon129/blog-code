@@ -5,7 +5,7 @@ import com.blog.spring_event_with_slack.spring_event_with_slack.catalog.domain.p
 import com.blog.spring_event_with_slack.spring_event_with_slack.catalog.domain.product.ProductRepository;
 import com.blog.spring_event_with_slack.spring_event_with_slack.order.domain.*;
 import com.blog.spring_event_with_slack.spring_event_with_slack.order.infrastructure.OrderRepository;
-import com.blog.spring_event_with_slack.spring_event_with_slack.order.infrastructure.SlackAlarmService;
+import com.blog.spring_event_with_slack.spring_event_with_slack.order.infrastructure.AlarmService;
 import com.blog.spring_event_with_slack.spring_event_with_slack.order.presentation.model.OrderProduct;
 import com.blog.spring_event_with_slack.spring_event_with_slack.order.presentation.model.OrderRequest;
 import org.springframework.stereotype.Service;
@@ -22,12 +22,12 @@ public class PlaceOrderService {
     private OrderRepository orderRepository;
     private OrdererService ordererService;
     private ProductRepository productRepository;
-    private SlackAlarmService slackAlarmService;
+    private AlarmService slackAlarmService;
 
     public PlaceOrderService(OrderRepository orderRepository,
                              OrdererService ordererService,
                              ProductRepository productRepository,
-                             SlackAlarmService slackAlarmService
+                             AlarmService slackAlarmService
     ) {
         this.orderRepository = orderRepository;
         this.ordererService = ordererService;

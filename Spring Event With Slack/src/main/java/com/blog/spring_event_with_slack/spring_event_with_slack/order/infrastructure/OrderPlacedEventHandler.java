@@ -7,17 +7,17 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class OrderPlacedEventHandler {
-    private SlackAlarmService slackAlarmService;
+    private AlarmService alarmService;
 
-    public OrderPlacedEventHandler(SlackAlarmService slackAlarmService) {
-        this.slackAlarmService = slackAlarmService;
+    public OrderPlacedEventHandler(AlarmService alarmService) {
+        this.alarmService = alarmService;
     }
 
 
     @Async
     @EventListener(OrderPlacedEvent.class)
     public void handle(OrderPlacedEvent evt) {
-        slackAlarmService.sendAlarm(evt);
+        alarmService.sendAlarm(evt);
 
     }
 }
