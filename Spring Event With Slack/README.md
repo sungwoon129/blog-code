@@ -1,7 +1,6 @@
 ## Spring Event를 활용한 Slack 메시지 전송 ##
 
 ### 프로젝트 소개 ###
-<hr>
 
 Spring Event 기능을 활용해서 주문 시스템에서 주문이 발생하면, Slack에 '주문알람' 메시지가 전송되는  
 기능을 구현한 프로젝트입니다.
@@ -15,8 +14,12 @@ REST API 만으로 구현했을 때 도메인계층에서 로직이 섞이는 �
 + 주문 기능
     + 상품 주문
 
+<br>
 
 ### UML ###
 
-![Spring Event EXAMPLE UML drawio](https://github.com/sungwoon129/blog-code/assets/43958570/8cbf8629-f00e-42ef-8dfa-c276bedd5a3d)
+![Spring Event EXAMPLE UML drawio](https://github.com/sungwoon129/blog-code/assets/43958570/21180f8a-1311-4700-b8af-96ed600f5c43)
+
+
+<br>
 
