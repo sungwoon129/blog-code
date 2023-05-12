@@ -15,7 +15,9 @@ public class JpaMain {
 
         try {
             tx.begin();
-            createMember(em);
+            //logic(em);
+            //createMember(em);
+            //manyToOneTest(em);
             tx.commit();
 
         } catch (Exception e) {
@@ -78,6 +80,23 @@ public class JpaMain {
 
     }
 
+    private static void manyToOneTest(EntityManager em) {
+        Team team1 = new Team();
+        team1.setName("team1");
 
+        em.persist(team1);
+        /* team1 객체를 영속성 컨텍스트에 persist해야만 정상적으로 DB에 트랜잭션이 반영된다.
+        member 객체만 영속성 컨텍스트에 관리를 위임한 경우, findMember 객체의 팀이름을 조회하는 출력문까지는 정상적으로 실행은 되지만
+        이후 DB에 트랜잭션을 커밋하는 과정에서 "Transaction not active" 오류가 발생한다
+        */
+        Member member = new Member();
+        member.setId("member1");
+        member.setUsername("팀원 회원");
+        member.setTeam(team1);
 
+        em.persist(member);
+
+        Member findMember = em.find(Member.class,"member1");
+        System.out.println(findMember.getTeam().getName());
+    }
 }

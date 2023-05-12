@@ -33,6 +33,10 @@ public class Member {
     @Lob
     private String description;
 
+    @ManyToOne
+    @JoinColumn(name = "team_id")
+    private Team team;
+
 
 
     public Member(String id, String username, Integer age, RoleType roleType, LocalDateTime createdDate, LocalDateTime lastModifiedDate, String description) {
@@ -87,5 +91,34 @@ public class Member {
 
     public String getDescription() {
         return description;
+    }
+
+    public void setRoleType(RoleType roleType) {
+        this.roleType = roleType;
+    }
+
+    public void setCreatedDate(LocalDateTime createdDate) {
+        this.createdDate = createdDate;
+    }
+
+    public void setLastModifiedDate(LocalDateTime lastModifiedDate) {
+        this.lastModifiedDate = lastModifiedDate;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public Team getTeam() {
+        return team;
+    }
+
+    public void setTeam(Team team) {
+        if(this.team != null) {
+            this.team.getMembers().remove(this);
+        }
+
+        this.team = team;
+        team.getMembers().add(this);
     }
 }
