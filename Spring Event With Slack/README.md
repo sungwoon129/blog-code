@@ -2,11 +2,12 @@
 
 ### 프로젝트 소개 ###
 
-Spring Event 기능을 활용해서 주문 시스템에서 주문이 발생하면, Slack에 '주문알람' 메시지가 전송되는  
-기능을 구현한 프로젝트입니다.
+Spring Event 기능을 활용해서 주문 시스템에서 주문이 발생하면, Slack에 '주문알람' 메시지가 전송되는 기능을 구현한 프로젝트입니다.
 REST API 만으로 구현했을 때 도메인계층에서 로직이 섞이는 부분이 있어서 Spring Event를 활용하면 로직이  
 도메인 계층에서 섞이지 않고, 주문했을 때 문자메시지를 발송하는 기능과 같은 추가기능을 필요로 할 때도 확장이
 용이할 것 같다는 생각에 구현해보았습니다.
+
+<br> 
 
 ### 요구사항 ###
 + 상품 기능
@@ -80,6 +81,8 @@ public class placeOrderService {
 위에서 이야기한 문제점들은 주문 도메인과 알림 도메인의 결합도가 너무 높아서 생기는 문제입니다.
 그리고 Event는 도메인 사이의 결합도를 낮출 수 있는 좋은 방법 중 하나입니다.
 
+<br>
+
 ### Spring Event 구현 ###
 
 이벤트를 활용하는 방법에는 크게 두가지가 있습니다. 하나는 트리거로 활용하는 방법이고, 다른 하나는 데이터 동기화로 활용하는 방법입니다.
@@ -87,13 +90,14 @@ public class placeOrderService {
 
 이벤트는 아래 그림과 같은 구조로 동작합니다.
 
+<br>
+
 ![이벤트 구성요소](https://github.com/sungwoon129/blog-code/assets/43958570/b5eac786-2bbd-49af-8fc9-c8dbb5ddf0a1)
 
-도메인 모델에서 이벤트 생성 주체는 엔티티, 밸류, 도메인 서비스와 같은 도메인 객체가 해당됩니다. 도메인 객체의 상태가 변경되면 이벤트를 발생시키는   
-역할을 합니다.
+<br>
+도메인 모델에서 이벤트 생성 주체는 엔티티, 밸류, 도메인 서비스와 같은 도메인 객체가 해당됩니다. 도메인 객체의 상태가 변경되면 이벤트를 발생시키는 역할을 합니다.
 
-이벤트 핸들러는 이벤트가 발생하면 이벤트 객체를 전달받아 이벤트 객체를 활용해서 기능을 수행합니다. 여기서는 주문정보를 가지고 있는 이벤트 객체를  
-전달받아서 알림을 보내는 기능을 수행합니다.
+이벤트 핸들러는 이벤트가 발생하면 이벤트 객체를 전달받아 이벤트 객체를 활용해서 기능을 수행합니다. 여기서는 주문정보를 가지고 있는 이벤트 객체를 전달받아서 알림을 보내는 기능을 수행합니다.
 
 이벤트 디스패처는 이벤트 생성 주체와 이벤트 핸들러 사이에서 이벤트 객체를 전달하는 역할을 합니다. 이벤트 생성 주체와 이벤트 핸들러는 직접적인 연관이  
 없습니다. 이벤트 생성 주체는 이벤트 디스패처에 이벤트를 전달하고 이벤트 핸들러는 이벤트 디스패처에게 이벤트를 전달받습니다. 디스패처는 사이에서 중간자  
@@ -105,6 +109,8 @@ public class placeOrderService {
 
 <br>
 이벤트 객체 다음과 같이 표현할 수 있습니다.
+
+<br>
 
 ```java
 @Getter
@@ -127,6 +133,8 @@ public class OrderPlacedEvent {
 알림 메시지를 표현하기 위해 필요한 정보인 주문자 정보와 주문상품들, 주문날짜등에 대한 정보가 담겨있습니다.
 이 이벤트를 발생시키는 주체는 Order 애그리거트가 될 것입니다.
 
+<br>
+
 ```java
 @Entity
 public class Order {
@@ -141,6 +149,8 @@ public class Order {
 
 여기서는 Events 클래스의 raise 메서드를 통해서 이벤트를 발생시킵니다. 
 Events 클래스와 raise 메서드는 스프링에서 제공하는 ApplicationEventPublisher를 활용해서 만든 클래스와 메서드입니다.
+
+<br>
 
 ```java
 public class Events {
@@ -161,6 +171,8 @@ public class Events {
 Events 클래스는 setPublisher 메서드를 통해서 ApplicationEventPublisher를 전달받고 있습니다.
 ApplicationEventPublisher를 전달해주기 위해서는 아래와 같은 스프링 설정클래스가 필요합니다.
 
+<br>
+
 ```java
 @Configuration
 public class EventsConfiguration {
@@ -174,6 +186,7 @@ public class EventsConfiguration {
     }
 }
 ```
+
 ApplicationContext는 애플리케이션에 대한 구성정보를 제공하는 인터페이스입니다. 스프링 컨테이너로서 Bean들의 정보를 포함하고 
 있습니다. 그리고 ApplicationEventPublisher를 상속하고 있습니다. 스프링에서 제공하는 인터페이스이므로 이미 구현되어 있기때문에 별도로  
 구현하지 않고 @Autowired로 애플리케이션 구성정보를 가져올 수 있습니다. 그리고 eventsInitializer 메서드의 반환타입인  
@@ -181,6 +194,8 @@ InitializingBean은 스프링 Bean 객체를 초기화할 때 사용하는 인�
 전달해서 Events 클래스를 초기화합니다.
 
 이제 이벤트가 발생하면 알림을 전송하는 기능을 구현한 이벤트 핸들러가 필요합니다.
+
+<br>
 
 ```java
 @Service
@@ -200,6 +215,7 @@ public class OrderPlacedEventHandler {
     }
 }
 ```
+
 ApplicationEventPublisher#publishEvent() 메서드를 실행할 때 OrderPlacedEvent 타입 객체를 전달하면  OrderPlacedEvent  
 값을 갖는 @EventListener 어노테이션을 가진 메서드를 찾아서 실행합니다. @Async 어노테이션은 이 메서드가 비동기적으로 실행되게   
 합니다. 이벤트 핸들러를 비동기적으로 실행하면, 주문기능이 외부서비스의 성능에 영향을 받는 문제를 해결할 수 있습니다. 
@@ -207,6 +223,8 @@ ApplicationEventPublisher#publishEvent() 메서드를 실행할 때 OrderPlacedE
 비동기적으로 실행되는 이벤트 핸들러는 주문 로직을 수행하는 스레드와 다른 스레드에서 수행되므로 알림 발송기능이 처리되는데 오랜 시간이
 걸리더라도 주문기능의 성능에 영향을 주지 않습니다. @Async 어노테이션을 사용하기 위해서는 @EnableAsync 어노테이션을 사용해서
 비동기 기능을 활성화 해주어야 합니다.
+
+<br>
 
 ```java
 @EnableAsync
@@ -224,6 +242,9 @@ public class SpringEventWithSlackApplication {
 깃허브 저장소에 올려두었습니다. 
 
 이제는 구현한 Spring Event가 정상적으로 동작하는지 확인하기 위해 테스트를 해보겠습니다.
+
+<br>
+
 ```java
 @ExtendWith(SpringExtension.class)
 @AutoConfigureMockMvc
