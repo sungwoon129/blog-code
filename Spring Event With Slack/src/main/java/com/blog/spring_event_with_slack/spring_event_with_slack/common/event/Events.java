@@ -15,5 +15,4 @@ public class Events {
             publisher.publishEvent(event);
         }
     }
-
 }

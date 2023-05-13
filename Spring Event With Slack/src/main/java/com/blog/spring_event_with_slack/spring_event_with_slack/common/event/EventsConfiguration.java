@@ -16,5 +16,4 @@ public class EventsConfiguration {
     public InitializingBean eventsInitializer() {
         return () -> Events.setPublisher(context);
     }
-
 }

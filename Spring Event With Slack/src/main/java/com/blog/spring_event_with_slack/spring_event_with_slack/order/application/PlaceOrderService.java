@@ -41,7 +41,7 @@ public class PlaceOrderService {
         for (OrderProduct op : orderRequest.getOrderProducts()) {
             Optional<Product> productOpt = productRepository.findById(new ProductId(op.getProductId()));
             Product product = productOpt.orElseThrow(() -> new NoSuchElementException(op.getProductId() + " no exist."));
-            orderLines.add(new OrderLine(product.getId(), product.getPrice(), op.getQuantity()));
+            orderLines.add(new OrderLine(product, product.getPrice(), op.getQuantity()));
         }
         OrderNo orderNo = orderRepository.nextOrderNo();
         Orderer orderer = ordererService.createOrderer(orderRequest.getOrdererMemberId());

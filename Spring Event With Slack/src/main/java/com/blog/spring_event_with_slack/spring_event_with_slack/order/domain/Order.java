@@ -48,7 +48,7 @@ public class Order {
         setOrderLines(orderLines);
         setShippingInfo(shippingInfo);
         this.orderDate = LocalDateTime.now();
-        Events.raise(new OrderPlacedEvent(orderer,orderLines,orderDate));
+        Events.raise(new OrderPlacedEvent(shippingInfo,orderLines,orderDate));
     }
 
     private void setNumber(OrderNo number) {

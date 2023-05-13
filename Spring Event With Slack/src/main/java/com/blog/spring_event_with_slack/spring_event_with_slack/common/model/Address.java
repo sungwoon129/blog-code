@@ -26,4 +26,9 @@ public class Address {
         this.address1 = address1;
         this.address2 = address2;
     }
+
+    public String getFullAddress() {
+        return address1 + address2;
+    }
+
 }

@@ -1,5 +1,7 @@
 package com.blog.spring_event_with_slack.spring_event_with_slack.order.infrastructure;
 
+import com.blog.spring_event_with_slack.spring_event_with_slack.catalog.domain.product.Product;
+import com.blog.spring_event_with_slack.spring_event_with_slack.order.domain.OrderLine;
 import com.blog.spring_event_with_slack.spring_event_with_slack.order.domain.OrderPlacedEvent;
 import com.slack.api.Slack;
 import com.slack.api.methods.MethodsClient;
@@ -16,6 +18,7 @@ import java.util.List;
 import static com.slack.api.model.block.Blocks.*;
 import static com.slack.api.model.block.composition.BlockCompositions.markdownText;
 import static com.slack.api.model.block.composition.BlockCompositions.plainText;
+import static java.util.stream.Collectors.joining;
 
 @Service
 public class SlackAlarmService implements AlarmService {
@@ -28,7 +31,10 @@ public class SlackAlarmService implements AlarmService {
     public void sendAlarm(OrderPlacedEvent evt) {
         try{
             List<TextObject> textObjects = new ArrayList<>();
-            textObjects.add(markdownText("*구매자 이름:*\n" + evt.getOrderer().getName()));
+            textObjects.add(markdownText("*수취인 이름:*\n" + evt.getShippingInfo().getReceiver().getName()));
+            textObjects.add(markdownText("*우편번호:*\n" + evt.getShippingInfo().getAddress().getZipCode()));
+            textObjects.add(markdownText("*배송지:*\n" + evt.getShippingInfo().getAddress().getFullAddress()));
+            textObjects.add(markdownText("*구매한 상품:*\n" + evt.getOrderLines().stream().map(orderLine -> orderLine.getProduct().getName()).collect(joining(","))));
             textObjects.add(markdownText("*구매 날짜:*\n" + evt.getOrderDate()));
             
 
@@ -36,7 +42,7 @@ public class SlackAlarmService implements AlarmService {
             ChatPostMessageRequest request = ChatPostMessageRequest.builder()
                     .channel(channel)
                     .blocks(asBlocks(
-                            header(header -> header.text(plainText( evt.getOrderer().getName() + "님이 상품을 주문하였습니다"))),
+                            header(header -> header.text(plainText( evt.getShippingInfo().getReceiver().getName() + "님에게 상품을 배송해야합니다"))),
                             divider(),
                             section(section -> section.fields(textObjects)
                             ))).build();

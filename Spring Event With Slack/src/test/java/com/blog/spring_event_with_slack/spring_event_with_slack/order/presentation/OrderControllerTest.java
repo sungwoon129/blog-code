@@ -69,7 +69,6 @@ class OrderControllerTest {
         productRepository.save(sampleProduct);
     }
 
-    @DisplayName("상품을 등록한다")
     @Test
     public void 상품을_등록한다() {
         ProductId productId = new ProductId("1");
@@ -87,9 +86,9 @@ class OrderControllerTest {
         MemberId id = MemberId.of("tester");
         OrderProduct orderProduct = new OrderProduct("1",2);
         List<OrderProduct> orderProducts = List.of(orderProduct);
-        Receiver receiver = new Receiver("윤성운","01012345678");
+        Receiver receiver = new Receiver("swy","01012345678");
 
-        ShippingInfo shippingInfo = new ShippingInfo(new Address("123-123","경기도 성남시 분당구","우리집"),"배송합니다",receiver);
+        ShippingInfo shippingInfo = new ShippingInfo(new Address("123-123","korea","home"),"배송합니다",receiver);
 
         OrderRequest orderRequest = new OrderRequest();
         orderRequest.setOrdererMemberId(id);
@@ -100,14 +99,9 @@ class OrderControllerTest {
 
         String data = objectMapper.writeValueAsString(orderRequest);
 
-
-        // 주문을 넣는 것과 슬랙알림 기능은 트랜잭션이므로 status가 200이란 것은 두 기능 모두 정상적으로 실행되었다는 것을 의미
         mvc.perform(post(url)
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(data)
         ).andExpect(status().isOk());
     }
-
-
-
 }
