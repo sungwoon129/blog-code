@@ -18,10 +18,13 @@ public class JpaMain {
             //logic(em);
             //createMember(em);
             //manyToOneTest(em);
+            manyToManySave(em);
+            manyToManyFind(em);
             tx.commit();
 
         } catch (Exception e) {
             tx.rollback();
+            e.printStackTrace();
         } finally {
             em.close();
         }
@@ -99,4 +102,42 @@ public class JpaMain {
         Member findMember = em.find(Member.class,"member1");
         System.out.println(findMember.getTeam().getName());
     }
+
+    private static void manyToManySave(EntityManager em) {
+        Member member = new Member();
+        member.setId("member1");
+        member.setUsername("user1");
+
+        em.persist(member);
+
+        Product product = new Product();
+        product.setId("product1");
+        product.setName("하잎보이");
+
+        em.persist(product);
+
+        Order order = new Order();
+        order.setMember(member);
+        order.setProduct(product);
+        order.setOrderAmount(2);
+
+        em.persist(order);
+    }
+
+    private static void manyToManyFind(EntityManager em) {
+        OrderId orderId = new OrderId();
+        orderId.setMember("member1");
+        orderId.setProduct("product1");
+
+        Order findOrder = em.find(Order.class,orderId);
+
+        Member member = findOrder.getMember();
+        Product product = findOrder.getProduct();
+
+        System.out.println(member.getUsername());
+        System.out.println(product.getName());
+        System.out.println(findOrder.getOrderAmount());
+    }
+
+
 }

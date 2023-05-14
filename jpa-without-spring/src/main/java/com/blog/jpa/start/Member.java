@@ -3,12 +3,11 @@ package com.blog.jpa.start;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
-@Table(name = "MEMBER", uniqueConstraints = { @UniqueConstraint(
-        name = "NAME_AGE_UNIQUE",
-        columnNames = {"NAME", "AGE"}
-)})
+@Table(name = "MEMBER")
 public class Member {
 
     @Id
@@ -36,6 +35,9 @@ public class Member {
     @ManyToOne
     @JoinColumn(name = "team_id")
     private Team team;
+
+    @OneToMany(mappedBy = "member")
+    private List<Order> products = new ArrayList<>();
 
 
 
@@ -119,6 +121,12 @@ public class Member {
         }
 
         this.team = team;
-        team.getMembers().add(this);
+
+        if(!team.getMembers().contains(this)) {
+            team.getMembers().add(this);
+        }
+
     }
+
+
 }
