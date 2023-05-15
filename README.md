@@ -12,5 +12,5 @@
 + [Spring Event + 이벤트 발생 시 슬랙 봇 알람](https://github.com/sungwoon129/blog-code/tree/main/Spring%20Event%20With%20Slack)
 + [jpa-without-spring](https://github.com/sungwoon129/blog-code/tree/main/jpa-without-spring)
 + [Documents](https://github.com/sungwoon129/blog-code/tree/main/documents)
-+ [Simple Netty Client]()
-+ [Simple Netty Server]()
++ [Simple Netty Client](https://github.com/sungwoon129/blog-code/tree/main/EchoClient)
++ [Simple Netty Server](https://github.com/sungwoon129/blog-code/tree/main/EchoServer)
