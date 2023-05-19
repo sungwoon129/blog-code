@@ -2,8 +2,11 @@ package com.blog.springrestdocsexample.Member.presentation;
 
 import com.blog.springrestdocsexample.Member.applicaation.MemberService;
 import com.blog.springrestdocsexample.Member.domain.Member;
+import com.blog.springrestdocsexample.Member.presentation.model.CommonResponse;
 import com.blog.springrestdocsexample.Member.presentation.model.MemberRequest;
 import com.blog.springrestdocsexample.Member.presentation.model.MemberResponse;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -20,9 +23,10 @@ public class MemberController {
     }
 
     @PostMapping("/member")
-    public Long add(@Valid MemberRequest memberRequest) {
+    public ResponseEntity<CommonResponse> add(@Valid MemberRequest memberRequest) {
 
-        return memberService.addMember(memberRequest);
+        CommonResponse commonResponse = new CommonResponse("OK","",memberService.addMember(memberRequest));
+        return new ResponseEntity<>(commonResponse, HttpStatus.OK);
 
     }
 

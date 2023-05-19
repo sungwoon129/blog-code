@@ -11,9 +11,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class MemberResponse {
 
-    private EmailAccount emailAccount;
+    private String email;
     private Address address;
-
-
 
 }

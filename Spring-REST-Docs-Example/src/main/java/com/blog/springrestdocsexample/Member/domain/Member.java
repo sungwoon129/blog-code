@@ -7,6 +7,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 
 @NoArgsConstructor
 @Getter
@@ -18,22 +19,24 @@ public class Member {
     @Column(name = "MBMBER_ID")
     private Long id;
 
-    @Embedded
-    private EmailAccount emailAccount;
+
+    private String email;
 
     private String password;
 
     @Embedded
     private Address address;
 
-    public Member(EmailAccount emailAccount, String password, Address address) {
-        this.emailAccount =emailAccount;
+
+
+    public Member(String email, String password, Address address) {
+        this.email =email;
         this.password = password;
         this.address = address;
     }
 
     public MemberResponse toResponseModel() {
-        return new MemberResponse(this.getEmailAccount(),this.getAddress());
+        return new MemberResponse(this.getEmail(),this.getAddress());
     }
 
 }

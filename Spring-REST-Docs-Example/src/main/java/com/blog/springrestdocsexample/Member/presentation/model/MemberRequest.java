@@ -14,8 +14,8 @@ import javax.validation.constraints.*;
 @NoArgsConstructor
 public class MemberRequest {
 
-
-    private EmailAccount emailAccount;
+    @Email
+    private String email;
 
     @Size(min = 4)
     private String password;
@@ -24,6 +24,6 @@ public class MemberRequest {
 
 
     public Member toEntity() {
-        return new Member(emailAccount,password,address);
+        return new Member(email,password,address);
     }
 }

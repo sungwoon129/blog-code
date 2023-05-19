@@ -2,25 +2,17 @@ ifndef::snippets[]
 :snippets: ./build/generated-snippets
 endif::[]
 
-== REQUEST
+= REST Docs 문서 만들기
+https://github.com/sungwoon129/blog-code/tree/main/Spring-REST-Docs-Example
+:doctype: book
+:source-highlighter: highlightjs
+:icons: font
+:toc: left // toc (Table Of Contents)를 문서의 좌측에 두기
+:toclevels: 2
 
-include::{snippets}/member/http-request.adoc[]
 
-== RESPONSE
+include::Member-API.adoc[]
 
-include::{snippets}/member/http-response.adoc[]
-
-== REQUEST FIELD
-
-include::{snippets}/member/request-fields.adoc[]
-
-== REQUEST BODY
-
-include::{snippets}/member/request-body.adoc[]
-
-== RESPONSE BODY
-
-include::{snippets}/member/response-body.adoc[]
 
 
 

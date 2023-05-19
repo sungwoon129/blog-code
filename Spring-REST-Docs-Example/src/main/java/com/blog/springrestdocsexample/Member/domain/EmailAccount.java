@@ -15,6 +15,7 @@ import java.util.Objects;
 @Embeddable
 public class EmailAccount {
 
+
     @Email
     private String email;
 
