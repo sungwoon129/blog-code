@@ -1,1 +1,1 @@
-## Spring REST Docs 체험기 ##
+## Spring REST Docs ##
