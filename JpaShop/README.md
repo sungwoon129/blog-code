@@ -34,7 +34,7 @@ JPA 실습을 위해서 상품 주문 및 회원 관리기능을 가진 서비�
 + JPA(Hibernate 6.2.2)
 + SpringBoot 3.1
 + Maven
-+ 
+
   <br>
   <br>
 
