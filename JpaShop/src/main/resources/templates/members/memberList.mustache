@@ -1,0 +1,35 @@
+{{>fragment/header}}
+<div class="container">
+    <article>
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>회원ID</th>
+                <th>회원명</th>
+            </tr>
+            </thead>
+            <tbody>
+            {{#members}}
+                <tr>
+                    <td>{{id}}</td>
+                    <td>{{name}}</td>
+                </tr>
+            {{/members}}
+            </tbody>
+        </table>
+        <div class="btn-group">
+            <button type="button" id="home" class="btn btn-outline-secondary">홈</button>
+            <button type="button" id="add" class="btn btn-outline-secondary">회원등록</button>
+        </div>
+    </article>
+</div>
+<script>
+    document.getElementById("add").onclick = function () {
+        location.href="/members/new"
+    }
+    document.getElementById("home").onclick = function () {
+        location.href="/"
+    }
+</script>
+{{>fragment/footer}}
+

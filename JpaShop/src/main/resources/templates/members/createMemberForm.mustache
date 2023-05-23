@@ -1,0 +1,23 @@
+{{>fragment/header}}
+<div class="container">
+    <form action="/members/new" method="post" id="member-form">
+        <div class="mb-3">
+            <label for="item-name" class="form-label">회원명</label>
+            <input id="item-name" name="name" class="form-control form-control-lg" type="text" placeholder="회원명" aria-label=".form-control-lg example">
+        </div>
+    </form>
+    <div class="btn-group">
+        <button type="button" id="cancel" class="btn btn-outline-secondary">취소</button>
+        <button type="button" id="add" class="btn btn-outline-secondary">등록</button>
+    </div>
+</div>
+<script>
+    document.getElementById("cancel").onclick = function () {
+        location.href="/members"
+    }
+    document.getElementById("add").onclick = function () {
+        document.getElementById("member-form").submit();
+    }
+
+</script>
+{{>fragment/footer}}

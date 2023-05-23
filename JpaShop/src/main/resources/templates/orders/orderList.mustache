@@ -1,0 +1,76 @@
+{{>fragment/header}}
+<div class="container">
+    <article>
+        <form class="row row-cols-lg-auto g-3 align-items-center" action="/orders" method="get">
+            <div class="col-12">
+                <label class="visually-hidden" for="memberName">회원명</label>
+                <input type="text" class="form-control" name="memberName" id="memberName" placeholder="회원명">
+            </div>
+
+            <div class="col-12">
+                <label class="visually-hidden" for="orderStatus">주문상태</label>
+                <select class="form-select" id="orderStatus" name="orderStatus">
+                    <option value="" selected>주문상태 선택</option>
+                    {{#orderStatus}}
+                        <option value="{{name}}">{{name}}</option>
+                    {{/orderStatus}}
+                </select>
+            </div>
+            <div class="col-12">
+                <button type="submit" class="btn btn-primary">검색</button>
+            </div>
+        </form>
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>주문ID</th>
+                <th>주문자</th>
+                <th>대표상품</th>
+                <th>대표상품 주문수량</th>
+                <th>주문일시</th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            {{#orders}}
+                <tr>
+                    <td>{{id}}</td>
+                    <td>{{member.name}}</td>
+                    <td>{{orderLines.0.item.name}}</td>
+                    <td>{{orderLines.0.count}}</td>
+                    <td>{{orderDate}}</td>
+                    <td>
+                        <button type="button" id="cancel" class="btn btn-outline-secondary" onclick="cancel({{id}})">주문취소</button>
+                    </td>
+                </tr>
+            {{/orders}}
+            </tbody>
+        </table>
+        <div class="btn-group">
+            <button type="button" id="home" class="btn btn-outline-secondary">홈</button>
+            <button type="button" id="placeOrder" class="btn btn-outline-secondary">주문</button>
+        </div>
+    </article>
+</div>
+<script>
+    document.getElementById("placeOrder").onclick = function () {
+        location.href="/orders/new";
+    }
+    document.getElementById("home").onclick = function () {
+        location.href="/"
+    }
+
+    function cancel(id) {
+        $.ajax({
+            method:"put",
+            url:"/orders/"+ id +"/cancel",
+            success: function (res) {
+                alert("주문이 취소되었습니다.");
+                location.href="/orders"
+            }
+        })
+    }
+
+</script>
+{{>fragment/footer}}
+

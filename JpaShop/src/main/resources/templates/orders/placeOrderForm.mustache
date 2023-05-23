@@ -1,0 +1,41 @@
+{{>fragment/header}}
+    <div class="container">
+        <form action="/orders/new" method="post" id="order-form">
+            <div class="mb-3">
+                <label for="member-id" class="form-label">주문회원</label>
+                <select id="member-id" name="memberId" class="form-select form-select-lg mb-3" aria-label=".form-select-lg example">
+                    <option selected>회원 선택</option>
+                    {{#members}}
+                    <option value="{{id}}">{{name}}</option>
+                    {{/members}}
+                </select>
+            </div>
+            <div class="mb-3">
+                <label for="itemId" class="form-label">상품명</label>
+                <select id="item" name="itemId" class="form-select form-select-lg mb-3" aria-label=".form-select-lg example">
+                    <option selected>상품 선택</option>
+                    {{#items}}
+                        <option value="{{id}}">{{name}}</option>
+                    {{/items}}
+                </select>
+            </div>
+            <div class="mb-3">
+                <label for="count" class="form-label">수량</label>
+                <input id="count" name="count" class="form-control form-control-lg" type="number" min="0" placeholder="수량" aria-label=".form-control-lg example">
+            </div>
+        </form>
+        <div class="btn-group">
+            <button type="button" id="cancel" class="btn btn-outline-secondary">취소</button>
+            <button type="button" id="placeOrder" class="btn btn-outline-secondary">등록</button>
+        </div>
+    </div>
+<script>
+    document.getElementById("cancel").onclick = function () {
+        location.href="/"
+    }
+    document.getElementById("placeOrder").onclick = function () {
+        document.getElementById("order-form").submit();
+    }
+
+</script>
+{{>fragment/footer}}

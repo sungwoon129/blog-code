@@ -1,0 +1,47 @@
+{{>fragment/header}}
+<div class="container px-4 text-center" style="justify-content: center">
+
+    <div class="row row-cols-2 btn-custom-group">
+        <div class="col mb-3">
+            <button type="button" id="members" class="btn btn-primary btn-lg">회원 목록</button>
+        </div>
+        <div class="col mb-3">
+            <button type="button" id="newMember" class="btn btn-primary btn-lg">회원 등록</button>
+        </div>
+        <div class="col mb-3">
+            <button type="button" id="items" class="btn btn-primary btn-lg">상품 목록</button>
+        </div>
+        <div class="col mb-3">
+            <button type="button" id="newItem" class="btn btn-primary btn-lg">상품 등록</button>
+        </div>
+        <div class="col mb-3">
+            <button type="button" id="orders" class="btn btn-primary btn-lg">주문 목록</button>
+        </div>
+        <div class="col mb-3">
+            <button type="button" id="placeOrder" class="btn btn-primary btn-lg">주문</button>
+        </div>
+    </div>
+</div>
+
+<script>
+    document.getElementById("members").onclick = function () {
+        location.href = "/members";
+    }
+    document.getElementById("newMember").onclick = function () {
+        location.href = "/members/new";
+    }
+    document.getElementById("items").onclick = function () {
+        location.href = "/items";
+    }
+    document.getElementById("newItem").onclick = function () {
+        location.href = "/items/new";
+    }
+    document.getElementById("orders").onclick = function () {
+        location.href = "/orders";
+    }
+    document.getElementById("placeOrder").onclick = function () {
+        location.href = "/orders/new";
+    }
+
+</script>
+{{>fragment/footer}}

@@ -1,0 +1,35 @@
+{{>fragment/header}}
+<div class="container">
+    {{#item}}
+    <form action="/items/{{id}}" method="post" id="create-from">
+        <input type="hidden" value="{{id}}" id="item-id" name="id">
+        <div class="mb-3">
+            <label for="item-name" class="form-label">상품명</label>
+            <input id="item-name" name="name" class="form-control form-control-lg" type="text" placeholder="상품명" aria-label=".form-control-lg example" value="{{name}}">
+        </div>
+        <div class="mb-3">
+            <label for="item-price" class="form-label">가격</label>
+            <input id="item-price" name="price" class="form-control form-control-lg" type="number" min="0" placeholder="가격" aria-label=".form-control-lg example" value="{{price}}">
+        </div>
+        <div class="mb-3">
+            <label for="item-stock" class="form-label">재고</label>
+            <input id="item-stock" name="stockQuantity" class="form-control form-control-lg" type="number" min="0" placeholder="재고" aria-label=".form-control-lg example" value="{{stockQuantity}}">
+        </div>
+    </form>
+    {{/item}}
+    <div class="btn-group" style="display: inline-block; margin-right: 10px">
+        <button type="button" id="cancel" class="btn btn-outline-secondary">취소</button>
+        <button type="button" id="addItem" class="btn btn-outline-secondary">수정</button>
+    </div>
+</div>
+<script>
+    $(document).ready(function () {
+        document.getElementById("cancel").onclick = function () {
+            location.href="/items"
+        }
+        $("#addItem").on("click",function () {
+            document.getElementById("create-from").submit();
+        })
+    })
+</script>
+{{>fragment/footer}}

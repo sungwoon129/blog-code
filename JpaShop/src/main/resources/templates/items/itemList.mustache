@@ -1,0 +1,43 @@
+{{>fragment/header}}
+    <div class="container">
+        <article>
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>상품ID</th>
+                        <th>상품명</th>
+                        <th>가격</th>
+                        <th>재고</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                {{#items}}
+                    <tr>
+                        <td>{{id}}</td>
+                        <td>{{name}}</td>
+                        <td>{{price}}</td>
+                        <td>{{stockQuantity}}</td>
+                        <td>
+                            <a href="/items/{{id}}/edit" class="btn btn-primary" role="button">수정</a>
+                        </td>
+                    </tr>
+                {{/items}}
+                </tbody>
+            </table>
+            <div class="btn-group">
+                <button type="button" id="home" class="btn btn-outline-secondary">홈</button>
+                <button type="button" id="addItem" class="btn btn-outline-secondary">상품등록</button>
+            </div>
+        </article>
+    </div>
+<script>
+    document.getElementById("addItem").onclick = function () {
+        location.href="/items/new"
+    }
+    document.getElementById("home").onclick = function () {
+        location.href="/"
+    }
+</script>
+{{>fragment/footer}}
+

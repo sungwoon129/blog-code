@@ -1,9 +1,6 @@
 package com.blog.jpa.start;
 
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.EntityTransaction;
-import javax.persistence.Persistence;
+import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -17,9 +14,33 @@ public class JpaMain {
             tx.begin();
             //logic(em);
             //createMember(em);
+
+
+            /**
+             * createMember 메소드 실행 이후 DB에 flush 메소드를 호출하지 않았지만 jpql을 통해서 조회해도 정상적으로 조회가 가능
+             * 기본적으로 Entity Manager의 flush 전략이 AUTO, 즉, 쿼리가 실행되기 직전에 flush를 하도록 설정되어 있기때문
+             */
+            String jpql = "select m from Member as m where m.username = :username";
+            List<Member> members =  em.createQuery(jpql, Member.class)
+                    .setParameter("username","woony")
+                    .getResultList();
+
+            StringBuilder sb = new StringBuilder();
+
+            for(Member m : members) {
+                System.out.println(sb.append(m.getId()));
+            }
+
             //manyToOneTest(em);
-            manyToManySave(em);
-            manyToManyFind(em);
+            //manyToManySave(em);
+            //manyToManyFind(em);
+
+
+            String fetchSql = "select t from Order t join t.product ";
+
+            TypedQuery<Order> tq = em.createQuery(fetchSql, Order.class);
+            List<Order> rs = tq.getResultList();
+
             tx.commit();
 
         } catch (Exception e) {
@@ -105,8 +126,8 @@ public class JpaMain {
 
     private static void manyToManySave(EntityManager em) {
         Member member = new Member();
-        member.setId("member1");
-        member.setUsername("user1");
+        member.setId("member3");
+        member.setUsername("user2");
 
         em.persist(member);
 

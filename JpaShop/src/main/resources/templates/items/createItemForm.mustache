@@ -1,0 +1,31 @@
+{{>fragment/header}}
+    <div class="container">
+        <form action="new" method="post" id="create-from">
+            <div class="mb-3">
+                <label for="item-name" class="form-label">상품명</label>
+                <input id="item-name" name="name" class="form-control form-control-lg" type="text" placeholder="상품명" aria-label=".form-control-lg example">
+            </div>
+            <div class="mb-3">
+                <label for="item-price" class="form-label">가격</label>
+                <input id="item-price" name="price" class="form-control form-control-lg" type="number" min="0" placeholder="가격" aria-label=".form-control-lg example">
+            </div>
+            <div class="mb-3">
+                <label for="item-stock" class="form-label">재고</label>
+                <input id="item-stock" name="stockQuantity" class="form-control form-control-lg" type="number" min="0" placeholder="재고" aria-label=".form-control-lg example">
+            </div>
+        </form>
+        <div class="btn-group">
+            <button type="button" id="cancel" class="btn btn-outline-secondary">취소</button>
+            <button type="button" id="addItem" class="btn btn-outline-secondary">등록</button>
+        </div>
+    </div>
+<script>
+    document.getElementById("cancel").onclick = function () {
+        location.href="/items"
+    }
+    document.getElementById("addItem").onclick = function () {
+        document.getElementById("create-from").submit();
+    }
+
+</script>
+{{>fragment/footer}}
