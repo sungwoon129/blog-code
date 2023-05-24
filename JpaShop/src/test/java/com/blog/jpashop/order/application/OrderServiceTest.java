@@ -1,14 +1,10 @@
 package com.blog.jpashop.order.application;
 
 import com.blog.jpashop.common.model.Address;
-import com.blog.jpashop.item.application.ItemService;
 import com.blog.jpashop.item.domain.Item;
 import com.blog.jpashop.item.domain.NotEnoughStockException;
-import com.blog.jpashop.member.application.MemberService;
 import com.blog.jpashop.member.domain.Member;
-import com.blog.jpashop.member.infrastructure.MemberRepository;
 import com.blog.jpashop.order.domain.Order;
-import com.blog.jpashop.order.domain.OrderLine;
 import com.blog.jpashop.order.domain.OrderStatus;
 import com.blog.jpashop.order.infrastructure.OrderRepository;
 import jakarta.persistence.EntityManager;
@@ -47,7 +43,7 @@ class OrderServiceTest {
         Long orderId = orderService.order(member.getId(),item.getId(),orderCount);
 
         //then
-        Order getOrder = orderRepository.findOne(orderId);
+        Order getOrder = orderRepository.findById(orderId).orElseThrow();
 
         assertEquals( OrderStatus.ORDER, getOrder.getStatus(),"상품 주문시 상태는 ORDER");
         assertEquals(1,getOrder.getOrderLines().size(),"주문한 상품 종류 수가 정확해야 한다.");
@@ -84,7 +80,7 @@ class OrderServiceTest {
         orderService.cancelOrder(orderId);
 
         //then
-        Order getOrder = orderRepository.findOne(orderId);
+        Order getOrder = orderRepository.findById(orderId).orElseThrow();
         assertEquals(getOrder.getStatus(),OrderStatus.CANCEL,"주문 취소시 주문의 상태는 CANCEL이다.");
         assertEquals(item.getStockQuantity(),10,"주문이 취소된 상품은 주문 수량만큼 재고가 증가해야 한다.");
 

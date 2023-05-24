@@ -2,10 +2,6 @@ package com.blog.jpashop.member.application;
 
 import com.blog.jpashop.member.domain.Member;
 import com.blog.jpashop.member.infrastructure.MemberRepository;
-import jakarta.persistence.EntityManager;
-import jakarta.persistence.EntityManagerFactory;
-import jakarta.persistence.Persistence;
-import jakarta.persistence.PersistenceContext;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -36,7 +32,7 @@ class MemberServiceTest {
         Long savedId = memberService.join(member);
 
         //then
-        assertThat(member).isEqualTo(memberRepository.findOne(savedId));
+        assertThat(member).isEqualTo(memberRepository.findById(savedId).orElseThrow());
     }
 
     @Test

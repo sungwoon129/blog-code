@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 
 @RequiredArgsConstructor
 @Transactional
@@ -33,7 +34,6 @@ public class MemberService {
         return memberRepository.findAll();
     }
 
-    public Member findOne(Long id) {
-        return memberRepository.findOne(id);
-    }
+    public Member findById(Long id) { return memberRepository.findById(id).orElseThrow(); }
+
 }
