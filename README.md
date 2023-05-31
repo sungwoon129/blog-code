@@ -15,3 +15,4 @@
 + [Simple Netty Client](https://github.com/sungwoon129/blog-code/tree/main/EchoClient)
 + [Simple Netty Server](https://github.com/sungwoon129/blog-code/tree/main/EchoServer)
 + [Spring Rest Docs](https://github.com/sungwoon129/blog-code/tree/main/Spring-REST-Docs-Example)
++ [RabbitMQ Toy App](https://github.com/sungwoon129/blog-code/tree/main/RabbitMQ%20Toy%20App)
