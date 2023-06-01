@@ -6,26 +6,56 @@ import com.rabbitmq.client.ConnectionFactory;
 import com.rabbitmq.client.DeliverCallback;
 
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.util.concurrent.TimeoutException;
 
 public class Recv {
 
-    private final static String QUEUE_NAME = "hello";
+    private final static String QUEUE_NAME = "task-queue";
+    public static void main(String[] args) {
 
-    public static void main(String[] args) throws IOException, TimeoutException {
+        int TEST_qos = 1;
         ConnectionFactory factory = new ConnectionFactory();
         factory.setHost("localhost");
-        Connection connection = factory.newConnection();
-        Channel channel = connection.createChannel();
 
-        channel.queueDeclare(QUEUE_NAME, false, false, false, null);
-        System.out.println(" [*] Waiting for messages. To exit press CTRL+C");
+        try {
+            Connection connection = factory.newConnection();
+            Channel channel = connection.createChannel();
 
-        DeliverCallback deliverCallback = ((consumerTag, delivery) -> {
-           String message = new String(delivery.getBody(), "UTF-8");
-           System.out.println(" [x] Received '" + message + "'");
-        });
+            channel.queueDeclare(QUEUE_NAME, true, false, false, null);
+            System.out.println(" [*] Waiting for messages. To exit press CTRL+C");
 
-        channel.basicConsume(QUEUE_NAME, true, deliverCallback, consumerTag -> {});
+            channel.basicQos(TEST_qos);
+
+            DeliverCallback deliverCallback = ((consumerTag, delivery) -> {
+                String message = new String(delivery.getBody(), StandardCharsets.UTF_8);
+                System.out.println(" [x] Received '" + message + "'");
+
+                try {
+                    doWork(message);
+                } finally {
+                    System.out.println(" [x] Done");
+                    channel.basicAck(delivery.getEnvelope().getDeliveryTag(), false);
+                }
+            });
+
+            boolean autoAck = true;
+            channel.basicConsume(QUEUE_NAME, autoAck, deliverCallback, consumerTag -> {});
+        } catch (IOException | TimeoutException exception) {
+            exception.printStackTrace();
+        }
+
+    }
+
+    private static void doWork(String message) {
+        int TEST_TIME = 1000;
+        try {
+            Thread.sleep(TEST_TIME);
+        } catch (InterruptedException _ignored) {
+            Thread.currentThread().interrupt();
+        }
+
     }
 }
+
+
