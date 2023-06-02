@@ -11,7 +11,7 @@ import java.util.concurrent.TimeoutException;
 
 public class Recv {
 
-    private static final String EXCHANGE_NAME = "logs";
+    private static final String EXCHANGE_NAME = "direct-logs";
     public static void main(String[] args) throws IOException, TimeoutException {
 
         ConnectionFactory factory = new ConnectionFactory();
@@ -20,10 +20,19 @@ public class Recv {
         Connection connection = factory.newConnection();
         Channel channel = connection.createChannel();
 
-        channel.exchangeDeclare(EXCHANGE_NAME,"fanout");
+        channel.exchangeDeclare(EXCHANGE_NAME,"direct");
 
         String queueName = channel.queueDeclare().getQueue();
-        channel.queueBind(queueName,EXCHANGE_NAME, "");
+
+        if (args.length < 1) {
+            System.err.println("Usage: ReceiveLogsDirect [info] [warning] [error]");
+            System.exit(1);
+        }
+
+        for(String severity : args){
+            channel.queueBind(queueName, EXCHANGE_NAME, severity);
+        }
+
         System.out.println(" [*] Waiting for messages. To exit press CTRL+C");
 
 
