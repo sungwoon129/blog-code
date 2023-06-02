@@ -16,5 +16,4 @@ task를 잃어버리지 않도록 함
 ### step 3 ###
 ![image](https://github.com/sungwoon129/blog-code/assets/43958570/90cf3525-ae25-41ee-a9bd-ffb596426a7e)
 
-subscribe-publisher 패턴으로 잘 알려진 구조를 메시지 큐로 구현한 예제. Producer가 broadcast 하는 모든 메시지를 모든 consumer가  
-구독하고 있는 구조. step 2까지는 퍼블리셔가 바로 queue에 메시지를 전달했지만, 사이에 exchange를 두어 exchange가 routing해주는 형태
+subscribe-publisher 패턴으로 잘 알려진 구조를 메시지 큐로 구현한 예제. Producer가 broadcast 하는 모든 메시지를 모든 consumer가 구독하고 있는 구조. step 2까지는 퍼블리셔가 바로 queue에 메시지를 전달했지만, 사이에 exchange를 두어 exchange가 routing해주는 형태
