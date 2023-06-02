@@ -5,10 +5,12 @@ import com.rabbitmq.client.Connection;
 import com.rabbitmq.client.ConnectionFactory;
 import com.rabbitmq.client.MessageProperties;
 
+import java.nio.charset.StandardCharsets;
+
 
 public class Send {
 
-    private final static String QUEUE_NAME = "task-queue";
+    private static final String EXCHANGE_NAME = "logs";
     public static void main(String[] args) {
         int TEST_MESSAGE = 10;
 
@@ -18,13 +20,13 @@ public class Send {
         try (Connection connection = factory.newConnection();
              Channel channel = connection.createChannel()){
 
-            for(int i=0; i < TEST_MESSAGE; i++) {
-                channel.queueDeclare(QUEUE_NAME, true, false, false, null);
-                String message = "Hello World!" + i;
-                channel.basicPublish("", QUEUE_NAME, MessageProperties.PERSISTENT_TEXT_PLAIN,message.getBytes());
-                System.out.println(" [x] Sent '" + message + "'");
+            channel.exchangeDeclare(EXCHANGE_NAME, "fanout");
 
-            }
+            String message = args.length < 1 ? "info: Hello World!" :
+                    String.join(" ", args);
+
+            channel.basicPublish(EXCHANGE_NAME, "", null, message.getBytes(StandardCharsets.UTF_8));
+            System.out.println(" [x] Sent '" + message + "'");
 
         } catch (Exception e) {
             e.printStackTrace();

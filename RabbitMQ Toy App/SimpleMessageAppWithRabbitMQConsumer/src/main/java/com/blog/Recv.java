@@ -11,51 +11,34 @@ import java.util.concurrent.TimeoutException;
 
 public class Recv {
 
-    private final static String QUEUE_NAME = "task-queue";
-    public static void main(String[] args) {
+    private static final String EXCHANGE_NAME = "logs";
+    public static void main(String[] args) throws IOException, TimeoutException {
 
-        int TEST_qos = 1;
         ConnectionFactory factory = new ConnectionFactory();
         factory.setHost("localhost");
 
-        try {
-            Connection connection = factory.newConnection();
-            Channel channel = connection.createChannel();
+        Connection connection = factory.newConnection();
+        Channel channel = connection.createChannel();
 
-            channel.queueDeclare(QUEUE_NAME, true, false, false, null);
-            System.out.println(" [*] Waiting for messages. To exit press CTRL+C");
+        channel.exchangeDeclare(EXCHANGE_NAME,"fanout");
 
-            channel.basicQos(TEST_qos);
+        String queueName = channel.queueDeclare().getQueue();
+        channel.queueBind(queueName,EXCHANGE_NAME, "");
+        System.out.println(" [*] Waiting for messages. To exit press CTRL+C");
 
-            DeliverCallback deliverCallback = ((consumerTag, delivery) -> {
-                String message = new String(delivery.getBody(), StandardCharsets.UTF_8);
-                System.out.println(" [x] Received '" + message + "'");
 
-                try {
-                    doWork(message);
-                } finally {
-                    System.out.println(" [x] Done");
-                    channel.basicAck(delivery.getEnvelope().getDeliveryTag(), false);
-                }
-            });
+        DeliverCallback deliverCallback = ((consumerTag, delivery) -> {
+            String message = new String(delivery.getBody(), StandardCharsets.UTF_8);
+            System.out.println(" [x] Received '" + message + "'");
 
-            boolean autoAck = true;
-            channel.basicConsume(QUEUE_NAME, autoAck, deliverCallback, consumerTag -> {});
-        } catch (IOException | TimeoutException exception) {
-            exception.printStackTrace();
-        }
+        });
+
+        boolean autoAck = true;
+        channel.basicConsume(queueName, autoAck, deliverCallback, consumerTag -> {});
+
 
     }
 
-    private static void doWork(String message) {
-        int TEST_TIME = 1000;
-        try {
-            Thread.sleep(TEST_TIME);
-        } catch (InterruptedException _ignored) {
-            Thread.currentThread().interrupt();
-        }
-
-    }
 }
 
 
