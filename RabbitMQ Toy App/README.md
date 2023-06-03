@@ -35,3 +35,12 @@ routing key를 가진 메시지는 버림
 step 4에서는 전달하는 message의 routing key와 queue의 binding key가 1:1 매칭이되는 'direct exchange'를 다루었지만,
 step 5에서는 여러 개의 routing key를 다루는 'topic exchange'를 다룬다. 'topic exchange'는 최대 255byte 길이의 문자열을 지원하며 단어들 사이는 '.'으로 구분한다.
 '*'은 1개의 단어를 의미하고 '#'은 0개 혹은 그 이상의 단어를 의미한다. *과# 을 활용해서 binding key에 다양한 조건을 줄 수 있고 수신하는 큐를 선택할 수 있다.
+
+
+### step 6 ###
+![image](https://github.com/sungwoon129/blog-code/assets/43958570/8c0856bf-2164-45ee-8595-79510ceeaf2d)
+
+원격 서버에 요청을 보내고, 원격 서버에서 처리를 하고 응답을 반환하는 구조를 구현한 예제. 일반적인 RPC 형태와 동일하다.
+클라이언트가 요청을 할 때, 반환할 큐의 정보와 반환받은 데이터가 요청한 데이터와 매칭이 되는지 확인하기 위한 correlationId 를 함께 AMQP.BasicProperties 클래스에 담아 전송한다.
+RPC는 요청과 응답이 동기적으로 처리되기 때문에 클라이언트는 요청을 보내고 응답을 받을 때까지 다른일을 하지 못하기 때문에 예제에서는 다루지않은
+문제들에 대한 고민이 필요하다. 구체적으로 응답서버가 죽었을 때나 응답서버가 너무 느려 timeout이 발생한다거나 응답서버에서 예외가 발생하는 등의 문제가 존재한다.

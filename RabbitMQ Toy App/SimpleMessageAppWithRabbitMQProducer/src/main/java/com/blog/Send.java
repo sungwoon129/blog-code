@@ -1,61 +1,72 @@
 package com.blog;
 
-import com.rabbitmq.client.Channel;
-import com.rabbitmq.client.Connection;
-import com.rabbitmq.client.ConnectionFactory;
-import com.rabbitmq.client.MessageProperties;
+import com.rabbitmq.client.*;
 
+import java.io.IOException;
 import java.nio.charset.StandardCharsets;
+import java.util.UUID;
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.TimeoutException;
 
 
-public class Send {
+public class Send implements AutoCloseable {
 
-    private static final String EXCHANGE_NAME = "topic-logs";
-    public static void main(String[] args) {
+    private String requestQueueName = "rpc_queue";
+    private Connection connection;
+    private Channel channel;
 
-
+    public Send() throws IOException, TimeoutException {
         ConnectionFactory factory = new ConnectionFactory();
         factory.setHost("localhost");
 
-        try (Connection connection = factory.newConnection();
-             Channel channel = connection.createChannel()){
+        connection = factory.newConnection();
+        channel = connection.createChannel();
+    }
+    public static void main(String[] args) {
 
-            channel.exchangeDeclare(EXCHANGE_NAME, "topic");
+        try (Send fibonacciRpc = new Send()){
 
-            String routingKey = getRouting(args);
-            String message = getMessage(args);
+            for (int i = 0; i < 32; i++) {
+                String i_str = Integer.toString(i);
+                System.out.println(" [x] Requesting fib(" + i_str + ")");
+                String response = fibonacciRpc.call(i_str);
+                System.out.println(" [.] Got '" + response + "'");
+            }
 
-            channel.basicPublish(EXCHANGE_NAME, routingKey, null, message.getBytes());
-            System.out.println(" [x] Sent '" + message + "'");
-
-        } catch (Exception e) {
+        } catch (IOException | TimeoutException | InterruptedException | ExecutionException e) {
             e.printStackTrace();
         }
     }
 
 
-    private static String getRouting(String[] strings) {
-        if (strings.length < 1)
-            return "anonymous.info";
-        return strings[0];
+    public String call(String message) throws IOException, InterruptedException, ExecutionException {
+        final String corrId = UUID.randomUUID().toString();
+
+        String replyQueueName = channel.queueDeclare().getQueue();
+        AMQP.BasicProperties props = new AMQP.BasicProperties
+                .Builder()
+                .correlationId(corrId)
+                .replyTo(replyQueueName)
+                .build();
+
+        channel.basicPublish("", requestQueueName, props, message.getBytes(StandardCharsets.UTF_8));
+
+        final CompletableFuture<String> response = new CompletableFuture<>();
+
+        String ctag = channel.basicConsume(replyQueueName, true, (consumerTag, delivery) -> {
+            if (delivery.getProperties().getCorrelationId().equals(corrId)) {
+                response.complete(new String(delivery.getBody(), StandardCharsets.UTF_8));
+            }
+        }, consumerTag -> {});
+
+        String result = response.get();
+        channel.basicCancel(ctag);
+        return result;
     }
 
-
-    private static String getMessage(String[] strings) {
-        if (strings.length < 2)
-            return "Hello World!";
-        return joinStrings(strings, " ", 1);
-    }
-
-    private static String joinStrings(String[] strings, String delimiter, int startIndex) {
-        int length = strings.length;
-        if (length == 0) return "";
-        if (length <= startIndex) return "";
-        StringBuilder words = new StringBuilder(strings[startIndex]);
-        for (int i = startIndex + 1; i < length; i++) {
-            words.append(delimiter).append(strings[i]);
-        }
-        return words.toString();
+    public void close() throws IOException {
+        connection.close();
     }
 }
 

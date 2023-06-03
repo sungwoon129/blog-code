@@ -1,9 +1,6 @@
 package com.blog;
 
-import com.rabbitmq.client.Channel;
-import com.rabbitmq.client.Connection;
-import com.rabbitmq.client.ConnectionFactory;
-import com.rabbitmq.client.DeliverCallback;
+import com.rabbitmq.client.*;
 
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
@@ -11,7 +8,13 @@ import java.util.concurrent.TimeoutException;
 
 public class Recv {
 
-    private static final String EXCHANGE_NAME = "topic-logs";
+    private static int fib(int n) {
+        if (n == 0) return 0;
+        if (n == 1) return 1;
+        return fib(n - 1) + fib(n - 2);
+    }
+
+    private static final String RPC_QUEUE_NAME = "rpc_queue";
     public static void main(String[] args) throws IOException, TimeoutException {
 
         ConnectionFactory factory = new ConnectionFactory();
@@ -20,30 +23,36 @@ public class Recv {
         Connection connection = factory.newConnection();
         Channel channel = connection.createChannel();
 
-        channel.exchangeDeclare(EXCHANGE_NAME,"topic");
+        channel.queueDeclare(RPC_QUEUE_NAME, false, false, false, null);
+        channel.queuePurge(RPC_QUEUE_NAME);
+        channel.basicQos(1);
 
-        String queueName = channel.queueDeclare().getQueue();
-
-        if (args.length < 1) {
-            System.err.println("Usage: ReceiveLogsTopic [binding_key]...");
-            System.exit(1);
-        }
-
-        for(String bindingKey : args){
-            channel.queueBind(queueName, EXCHANGE_NAME, bindingKey);
-        }
-
-        System.out.println(" [*] Waiting for messages. To exit press CTRL+C");
+        System.out.println(" [x] Awaiting RPC requests");
 
 
         DeliverCallback deliverCallback = ((consumerTag, delivery) -> {
-            String message = new String(delivery.getBody(), StandardCharsets.UTF_8);
-            System.out.println(" [x] Received '" + message + "'");
+            AMQP.BasicProperties props = new AMQP.BasicProperties()
+                                        .builder()
+                    .correlationId(delivery.getProperties().getCorrelationId())
+                                        .build();
+
+            String response = "";
+            try {
+                String message = new String(delivery.getBody(),StandardCharsets.UTF_8);
+                int n = Integer.parseInt(message);
+
+                System.out.println(" [.] fib(" + message + ")");
+                response += fib(n);
+            } catch (RuntimeException e) {
+                System.out.println(" [.] " + e);
+            } finally {
+               channel.basicPublish("", delivery.getProperties().getReplyTo(), props, response.getBytes(StandardCharsets.UTF_8));
+            }
 
         });
 
         boolean autoAck = true;
-        channel.basicConsume(queueName, autoAck, deliverCallback, consumerTag -> {});
+        channel.basicConsume(RPC_QUEUE_NAME, autoAck, deliverCallback, consumerTag -> {});
 
 
     }
