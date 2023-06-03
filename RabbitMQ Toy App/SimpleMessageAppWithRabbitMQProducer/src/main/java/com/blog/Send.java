@@ -10,7 +10,7 @@ import java.nio.charset.StandardCharsets;
 
 public class Send {
 
-    private static final String EXCHANGE_NAME = "direct-logs";
+    private static final String EXCHANGE_NAME = "topic-logs";
     public static void main(String[] args) {
 
 
@@ -20,12 +20,12 @@ public class Send {
         try (Connection connection = factory.newConnection();
              Channel channel = connection.createChannel()){
 
-            channel.exchangeDeclare(EXCHANGE_NAME, "direct");
+            channel.exchangeDeclare(EXCHANGE_NAME, "topic");
 
-            String severity = getSeverity(args);
+            String routingKey = getRouting(args);
             String message = getMessage(args);
 
-            channel.basicPublish(EXCHANGE_NAME, severity, null, message.getBytes());
+            channel.basicPublish(EXCHANGE_NAME, routingKey, null, message.getBytes());
             System.out.println(" [x] Sent '" + message + "'");
 
         } catch (Exception e) {
@@ -34,11 +34,12 @@ public class Send {
     }
 
 
-    private static String getSeverity(String[] strings) {
+    private static String getRouting(String[] strings) {
         if (strings.length < 1)
-            return "info";
+            return "anonymous.info";
         return strings[0];
     }
+
 
     private static String getMessage(String[] strings) {
         if (strings.length < 2)

@@ -26,3 +26,10 @@ step 2까지는 퍼블리셔가 바로 queue에 메시지를 전달했지만, �
 step 3에서는 exchange를 fanout 방식으로 만들어서 모든 queue에 메시지를 발송했지만, 이번엔 direct 방식으로 만들고 binding key를 통해 routing하는 형태를 구현.
 producer에서 발행한 메시지의 routing key와 Consumer에서 구독하고 있는 queue의 binding key가 일치할 경우에만 메시지를 queue에 버퍼링하고 어느 queue와도 일치하지 않는 
 routing key를 가진 메시지는 버림
+
+### step 5 ###
+![image](https://github.com/sungwoon129/blog-code/assets/43958570/adef5f39-7e6f-4013-adfa-3b86045f7b6c)
+
+step 4에서는 전달하는 message의 routing key와 queue의 binding key가 1:1 매칭이되는 'direct exchange'를 다루었지만,
+step 5에서는 여러 개의 routing key를 다루는 'topic exchange'를 다룬다. 'topic exchange'는 최대 255byte 길이의 문자열을 지원하며 단어들 사이는 '.'으로 구분한다.
+'*'은 1개의 단어를 의미하고 '#'은 0개 혹은 그 이상의 단어를 의미한다. *과# 을 활용해서 binding key에 다양한 조건을 줄 수 있고 수신하는 큐를 선택할 수 있다.
