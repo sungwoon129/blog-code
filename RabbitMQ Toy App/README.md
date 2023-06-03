@@ -1,6 +1,8 @@
 ## RabbitMQ 학습 목적의 어플리케이션 ##
 
-RabbitMQ 학습목적으로 RabbitMQ 공식문서의 tutorial을 실습한 프로젝트입니다. 
+RabbitMQ 학습목적으로 RabbitMQ 공식문서의 tutorial을 실습한 프로젝트입니다.
+이 튜토리얼은 rabbitMQ가 설치되어있음을 가정하며, rabbitMQ 프로세스가 localhost 환경과 기본 포트번호인 5672를 사용한다고 가정합니다.
+저는 docker 를 활용하여 rabbitMQ 이미지를 가진 컨테이너 환경에 rabbitMQ를 설치하고 진행하였습니다.
 
 ### step 1 ###
 ![image](https://github.com/sungwoon129/blog-code/assets/43958570/e457192e-8e12-4c21-b28c-3c79c57e0b0d)
