@@ -39,6 +39,8 @@ rabbitmq라는 이름의 컨테이너를 내부포트와 외부포트 모두 567
 
 
 
+
+
 ### Message Producer&Consumer ###
 
 이제 메시지를 생산하고 큐에 입력하는 producer 코드를 작성해보겠습니다.
