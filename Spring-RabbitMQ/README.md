@@ -2,8 +2,8 @@
 
 SpringBoot에서 RabbitMQ를 연동한 예제입니다.
 
-
-
+  
+  
 
 ### MQ(Message Queue)의 사용목적 ###
 서버가 클라이언트와 동기방식으로만 데이터 통신을 하다보면, 데이터 양이 많아질 경우 병목현상이 발생하여 성능이 저하될 수 있습니다.
@@ -38,8 +38,8 @@ rabbitmq라는 이름의 컨테이너를 내부포트와 외부포트 모두 567
 이 화면을 보기 전에 username과 password를 입력하는 페이지가 있는데, 별도의 설정을 하지 않는경우 guest/guest가 기본값입니다.
 
 
-
-
+  
+  
 
 ### Message Producer&Consumer ###
 
