@@ -1,7 +1,5 @@
 ## SpringBoot + RabbitMQ ##
 
-SpringBoot에서 RabbitMQ를 연동한 예제입니다.
-
 <br>
 <br>
   
