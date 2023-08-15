@@ -2,7 +2,8 @@
 
 SpringBoot에서 RabbitMQ를 연동한 예제입니다.
 
-  
+<br>
+<br>
   
 
 ### MQ(Message Queue)의 사용목적 ###
@@ -38,8 +39,9 @@ rabbitmq라는 이름의 컨테이너를 내부포트와 외부포트 모두 567
 이 화면을 보기 전에 username과 password를 입력하는 페이지가 있는데, 별도의 설정을 하지 않는경우 guest/guest가 기본값입니다.
 
 
-  
-  
+
+
+<br>
 
 ### Message Producer&Consumer ###
 
