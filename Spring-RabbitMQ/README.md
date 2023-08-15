@@ -1,9 +1,9 @@
-### SpringBoot + RabbitMQ ###
+## SpringBoot + RabbitMQ ##
 
 SpringBoot에서 RabbitMQ를 연동한 예제입니다.
 
 
-## MQ(Message Queue)의 사용목적 ##
+### MQ(Message Queue)의 사용목적 ###
 서버가 클라이언트와 동기방식으로만 데이터 통신을 하다보면, 데이터 양이 많아질 경우 병목현상이 발생하여 성능이 저하될 수 있습니다.
 그래서 많은 사용자에게 알림을 전송한다거나 메시지를 전송해야하는 기능이 필요한 경우 RabbitMQ와 같은 MQ(MessageQueue)를 사용하는 것을 고려해볼 수 있습니다.
 기본적으로 대부분의 MQ는 메시지를 생산하는 Producer와 메시지를 소비하는 Consumer가 존재합니다.
@@ -30,11 +30,14 @@ rabbitmq라는 이름의 컨테이너를 내부포트와 외부포트 모두 567
 
 15672 포트는 rabbitMQ의 동작을 모니터링할 수 있도록 제공되는 웹페이지 포트입니다. 
 아래와 같은 웹페이지에 접속이 가능합니다.
+
 ![img.png](img.png)
 
 이 화면을 보기 전에 username과 password를 입력하는 페이지가 있는데, 별도의 설정을 하지 않는경우 guest/guest가 기본값입니다.
 
-## Message Producer&Consumer ##
+
+
+### Message Producer&Consumer ###
 
 이제 메시지를 생산하고 큐에 입력하는 producer 코드를 작성해보겠습니다.
 SpringBoot와 연동해서 구현할 것이므로 먼저 관련 의존성을 추가해줍니다.
@@ -189,6 +192,7 @@ receiveMessage 메소드에는 @RabbitListener을 달아주고, 구독할 큐의
 이제 실행해서 메시지를 발행해 보겠습니다.
 
 Postman을 통해서 localhost:8080/message의 주소로 아래의 값을 전송하겠습니다.
+
 ```json
 {
     "title" : "qwe",
@@ -206,8 +210,11 @@ Postman을 통해서 localhost:8080/message의 주소로 아래의 값을 전송
 exchange와 queue에 메시지가 잘 전달된 것을 확인할 수 있습니다.
 그리고 실행중인 application에 콘솔창을 보면 전달한 메시지가 출력되는 모습을 확인할 수 있습니다.
 
+
 ![img_5.png](img_5.png)
 
+
+### 마무리 ###
 
 여기까지해서 간단한 SpringBoot와 RabbitMQ를 연동하는 어플리케이션을 만들어보았습니다.
 이번 프로젝트에서는 가장 기초적인 형태로 구현하였지만 실제로 서비스를 할 때는 훨씬 더 복잡한 요구사항이 있기 때문에 좀 더 많은 부분을 고려해야겠지만,
