@@ -16,3 +16,4 @@
 + [Simple Netty Server](https://github.com/sungwoon129/blog-code/tree/main/EchoServer)
 + [Spring Rest Docs](https://github.com/sungwoon129/blog-code/tree/main/Spring-REST-Docs-Example)
 + [RabbitMQ Toy App](https://github.com/sungwoon129/blog-code/tree/main/RabbitMQ%20Toy%20App)
++ [SpringBoot RabbitMq](https://github.com/sungwoon129/blog-code/tree/main/Spring-RabbitMQ)
