@@ -64,7 +64,7 @@ Young 영역은 새롭게 생성된 객체가 할당되는 영역입니다.
 Young 영역에서 일어나는 GC를 Minor GC라고 합니다.
 또한, Young 영역은 3가지 영역으로 구분됩니다.
 
-Eden : new 연산자를 통해 새로 생성된 객체가 위치하고, minor GC가 일어난 뒤 살아남은 객체들은 Survivor 영역으로 보냅니다.
+Eden : new 연산자를 통해 새로 생성된 객체가 위치하고, minor GC가 일어난 뒤 살아남은 객체들은 Survivor 영역으로 보냅니다.  
 Survivor 0 / Survivor 1 : 최소 1번 이상의 GC에서 살아남은 객체가 존재하는 영역입니다. Survivor 영역에는 특별한 규칙이 있는데, 하나의 영역에 객체가 존재할 때 다른 영역은 반드시 비어있어야 한다는 것입니다.  
 
 #### Old Genration ####
