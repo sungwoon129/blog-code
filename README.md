@@ -17,6 +17,7 @@
 + [Spring Rest Docs](https://github.com/sungwoon129/blog-code/tree/main/Spring-REST-Docs-Example)
 + [RabbitMQ Toy App](https://github.com/sungwoon129/blog-code/tree/main/RabbitMQ%20Toy%20App)
 + [SpringBoot RabbitMq](https://github.com/sungwoon129/blog-code/tree/main/Spring-RabbitMQ)
++ [@ModelAttribute 어노테이션을 생략했을 때 파라미터가 바인딩되는 과정](https://github.com/sungwoon129/blog-code/tree/main/ModelAttribute-Annotation)
 + [JVM](https://github.com/sungwoon129/blog-code/tree/main/JVM)
 + [Garbage Collection 1](https://github.com/sungwoon129/blog-code/tree/main/Garbage-Collection-1)
 + [Garbage Collection 2(GC 종류)](https://github.com/sungwoon129/blog-code/tree/main/Garbage-Collection-2)
