@@ -42,7 +42,7 @@ ArgumentResolver라는 이름부터가 인자를 해결한다는 의미입니다
 
 이제 구체적인 코드를 보면서 과정을 따라가 보겠습니다.
 
-[##_Image|kage@oYyfw/btsr5IrHKiK/mMHWy0yBs4cpjyMwD8P5N1/img.png|CDM|1.3|{"originWidth":950,"originHeight":740,"style":"alignCenter","caption":"AbstractAutowireCapableBeanFactory&amp;nbsp; - invokeInitMethods"}_##]
+![image](https://github.com/sungwoon129/blog-code/assets/43958570/35e478f3-8458-4da8-9221-05a39410feb9)
 
 위 사진은 스프링이 Bean을 생성하는 코드를 따라가다 argumentResolver를 부분을 캡쳐한 것입니다.
 
@@ -50,7 +50,7 @@ AbstractAutowireCapableBeanFactory 클래스의 Bean을 생성하는 createBean 
 
 메소드 중간부분에 afterPropertiesSet 메소드에서 ArgumentResolver들을 등록하는 역할을 합니다.
 
-[##_Image|kage@ztPCB/btsr9Rhw2dn/B1Wsk5LiGRJL3o6xTBhZZk/img.png|CDM|1.3|{"originWidth":929,"originHeight":339,"style":"alignCenter"}_##]
+![image](https://github.com/sungwoon129/blog-code/assets/43958570/63e6807c-0786-4454-aa82-0de7312d1560)
 
 afterPropertiesSet 메소드의 내용을 보면 getDefaultArgumentResolvers 메소드에서 default argumentResolver들을 얻어옵니다. default argumentResolver는 위에서 이야기한 스프링이 다양한 타입의 파라미터들을 바인딩하기 위해 미리 정의한 ArgumentResolver를 의미합니다. 
 
@@ -82,7 +82,7 @@ UserSearchRequest 는 아무런 어노테이션이 없기에 어노테이션 기
 
 여기서 생성자의 인자로 true를 전달하는데, 잘 기억해두고 다음으로 넘어가서 이야기해보도록 하겠습니다.
 
-[##_Image|kage@XV7Ia/btssaSmMNcp/UWKupTOcpuV01FG1KLb8yK/img.png|CDM|1.3|{"originWidth":1162,"originHeight":539,"style":"alignCenter"}_##]
+![image](https://github.com/sungwoon129/blog-code/assets/43958570/7d3cb074-81eb-4136-a4a0-b4d01a5b850b)
 
 ServletModelAttributeMethodProcessor 클래스 코드를 보면 이 클래스가 ModelAttributeMethodProcessor를 상속한 클래스라는 것을 알 수 있습니다.
 
@@ -102,13 +102,13 @@ SimpleProperty가 아니라는 것은 Int, String과 같은 자바 기본타입�
 
 먼저 클라이언트에서 보낸 요청이 DispatcherServlet에 전달되고 요청을 처리할 수 있는 HandlerAdapter를 찾은뒤에 handle() 메소드를 실행합니다. 
 
-[##_Image|kage@bwKAkT/btsr64apBWl/uN37YVq4BXDy0z2YoTQAEK/img.png|CDM|1.3|{"originWidth":675,"originHeight":308,"style":"alignCenter","caption":"출처: https://www.inflearn.com/course/%EC%8A%A4%ED%94%84%EB%A7%81-mvc-1 교재 자료"}_##]
+![image](https://github.com/sungwoon129/blog-code/assets/43958570/3736e907-9a02-4a96-8c04-88ef4ce27ac3)
 
 그리고 이 과정에서 등록된 ArgumentResolver들을 순회하면서 클라이언트에서 넘어온 argument를 처리할 수 있는 ArgumentResolver를 찾습니다. 이 글의 초반부에 이야기한 파라미터(어노테이션이 없고 기본타입이 아닌 파라미터)는 
 
 ServletModelAttributeMethodProcessor에서 처리할 수 있으므로 ServletModelAttributeMethodProcessor가 이 Argument를 처리할 resolver로 선택됩니다.
 
-[##_Image|kage@bzqwLj/btssbz1yfO9/H91QQRFtz1u8kfcq5LNnL0/img.png|CDM|1.3|{"originWidth":950,"originHeight":350,"style":"alignCenter"}_##]
+![image](https://github.com/sungwoon129/blog-code/assets/43958570/93ac4075-59c7-495f-b66e-6284e0e3362a)
 
 그리고 ArgumentResolver에서 argument를 분석해서 파라미터에 바인딩 시켜줍니다.
 
