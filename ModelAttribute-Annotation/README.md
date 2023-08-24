@@ -44,7 +44,7 @@ ArgumentResolver라는 이름부터가 인자를 해결한다는 의미입니다
 
 ![image](https://github.com/sungwoon129/blog-code/assets/43958570/35e478f3-8458-4da8-9221-05a39410feb9)
 
-위 사진은 스프링이 Bean을 생성하는 코드를 따라가다 argumentResolver를 부분을 캡쳐한 것입니다.
+위 사진은 스프링이 Bean을 생성하는 코드를 따라가다 argumentResolver를 등록하는 함수가 포함된 메소드를 캡쳐한 것입니다.
 
 AbstractAutowireCapableBeanFactory 클래스의 Bean을 생성하는 createBean 메소드를 따라가다 보면 Bean을 생성하고 초기화하는 메소드를 호출하면서 invokeInitMethods 메소드를 호출합니다.
 
