@@ -11,6 +11,8 @@ public class Main {
          *  a. BubbleSort
          * 2. 자료구조
          *  a. stack
+         * 3. Greedy
+         *  a. 섬 연결하기
          */
 
 
@@ -24,7 +26,7 @@ public class Main {
         /**
          * 자료구조 실행
          */
-        Stack<Character> stack = new Stack<>();
+        /*Stack<Character> stack = new Stack<>();
         System.out.println(stack.pop());
         stack.push('C');
         stack.push('A');
@@ -34,7 +36,9 @@ public class Main {
         System.out.println(stack.pop());
         System.out.println(stack.pop());
         System.out.println(stack.pop());
-        System.out.println(stack.pop());
+        System.out.println(stack.pop());*/
+
+
 
 
 
