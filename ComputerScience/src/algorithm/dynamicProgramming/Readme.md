@@ -154,7 +154,7 @@ List<Set<Integer>> setList = new ArrayList<>();
 
 JSON으로 표현하면 아래와 같은 구조가 될 것입니다.
 
-```json
+```javascript
 [
     [
     	5
