@@ -1,5 +1,7 @@
 ## Thread 별로 가지는 저장 공간 ThreadLocal ##
 
+[Blog 링크](https://style-tech.tistory.com/34)
+
 ![image](https://github.com/sungwoon129/blog-code/assets/43958570/3176af6d-77d8-4d07-926b-245a3f191b14)
 
 ### **ThreadLocal 이란?**
