@@ -1,5 +1,5 @@
 package com.blog.adapter;
 
 public interface Adapter {
-    public HDMICable adapt(DviCable dviCable);
+    public HDMI adapt(RGB RGB);
 }
