@@ -2,6 +2,5 @@
 
 게임 캐릭터가 착용하는 무기에 따라 공격 모션, 공격속도 등 다양한 변화가 생기는 것을 구현할 때, 전략패턴도 고려해볼 수 있는 하나의 옵션이라는 생각으로 간단하게 구현한 예제
 
-
-![image](https://github.com/sungwoon129/blog-code/assets/43958570/e00d3ab5-ac1f-4662-8572-d34cdd677d78)
+![image](https://github.com/sungwoon129/blog-code/assets/43958570/a242667b-6f36-4cf1-816b-40187161f644)
 
