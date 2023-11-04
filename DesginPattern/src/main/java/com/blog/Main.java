@@ -4,6 +4,9 @@ import com.blog.adapter.Adapter;
 import com.blog.adapter.HDMIConverter;
 import com.blog.adapter.RGB;
 import com.blog.adapter.HDMIPort;
+import com.blog.factory_method.AbstractFactory;
+import com.blog.factory_method.ConcreteFactory;
+import com.blog.factory_method.ProductInterface;
 import com.blog.strategy.EldenRingCharacter;
 import com.blog.strategy.Spear;
 import com.blog.template_method.Cash;
@@ -24,11 +27,16 @@ public class Main {
 
         hdmiPort.getSign(adapter.adapt(new RGB()));
 
-        // 템플릿 메소드 패턴(Template Method Pattern
+        // 템플릿 메소드 패턴(Template Method Pattern)
         Payment cash = new Cash();
         Payment point = new Cash();
         cash.pay();
         point.pay();
+
+        // 팩토리 메소드 패턴(Factory Method Pattern)
+        AbstractFactory[] factories = { new ConcreteFactory()};
+
+        ProductInterface productA = factories[0].makeSomeOperation();
 
     }
 }
