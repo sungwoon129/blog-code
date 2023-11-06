@@ -7,6 +7,10 @@ import com.blog.adapter.HDMIPort;
 import com.blog.factory_method.AbstractFactory;
 import com.blog.factory_method.ConcreteFactory;
 import com.blog.factory_method.ProductInterface;
+import com.blog.prototype.annoymous.MessageBox;
+import com.blog.prototype.annoymous.UnderlinePen;
+import com.blog.prototype.framework.Manager;
+import com.blog.prototype.framework.Product;
 import com.blog.strategy.EldenRingCharacter;
 import com.blog.strategy.Spear;
 import com.blog.template_method.Cash;
@@ -37,6 +41,23 @@ public class Main {
         AbstractFactory[] factories = { new ConcreteFactory()};
 
         ProductInterface productA = factories[0].makeSomeOperation();
+
+        // 프로토 타입 패턴(Prototype Pattern)
+        Manager manager = new Manager();
+        UnderlinePen upen = new UnderlinePen('~');
+        MessageBox mbox = new MessageBox('*');
+        MessageBox sbox = new MessageBox('/');
+        manager.register("strong message", upen);
+        manager.register("warning box", mbox);
+        manager.register("slash box", sbox);
+
+
+        Product p1 = manager.create("strong message");
+        p1.use("Hello, world.");
+        Product p2 = manager.create("warning box");
+        p2.use("Hello, world");
+        Product p3 = manager.create("slash box");
+        p3.use("slash box");
 
     }
 }
