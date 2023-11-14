@@ -11,6 +11,7 @@ import com.blog.prototype.annoymous.MessageBox;
 import com.blog.prototype.annoymous.UnderlinePen;
 import com.blog.prototype.framework.Manager;
 import com.blog.prototype.framework.Product;
+import com.blog.singleton.Singleton;
 import com.blog.strategy.EldenRingCharacter;
 import com.blog.strategy.Spear;
 import com.blog.template_method.Cash;
@@ -58,6 +59,14 @@ public class Main {
         p2.use("Hello, world");
         Product p3 = manager.create("slash box");
         p3.use("slash box");
+
+        // 싱글톤 패턴(Singleton pattern)
+        System.out.println("start");
+        Singleton instance1 = Singleton.getInstance();
+        Singleton instance2 = Singleton.getInstance();
+
+        System.out.println("instance1과 instance2 동일성 비교::"+ (instance1==instance2));
+
 
     }
 }
