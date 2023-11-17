@@ -4,6 +4,9 @@ import com.blog.adapter.Adapter;
 import com.blog.adapter.HDMIConverter;
 import com.blog.adapter.RGB;
 import com.blog.adapter.HDMIPort;
+import com.blog.builder.Director;
+import com.blog.builder.HTMLBuilder;
+import com.blog.builder.TextBuilder;
 import com.blog.factory_method.AbstractFactory;
 import com.blog.factory_method.ConcreteFactory;
 import com.blog.factory_method.ProductInterface;
@@ -64,6 +67,21 @@ public class Main {
         System.out.println("start");
         Singleton instance1 = Singleton.getInstance();
         Singleton instance2 = Singleton.getInstance();
+
+        // 빌더 패턴(builder pattern)
+        if (args[0].equals("plain")) {
+            TextBuilder textBuilder = new TextBuilder();
+            Director director = new Director(textBuilder);
+            director.constructor();
+            String result = textBuilder.getResult();
+            System.out.println(result);
+        } else if (args[0].equals("html")) {
+            HTMLBuilder htmlBuilder = new HTMLBuilder();
+            Director director = new Director(htmlBuilder);
+            director.constructor();
+            String filename = htmlBuilder.getResult();
+            System.out.println(filename + "가 작성되었습니다.");
+        }
 
         System.out.println("instance1과 instance2 동일성 비교::"+ (instance1==instance2));
 
