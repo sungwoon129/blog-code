@@ -4,7 +4,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Admin extends User implements AdminInterface<User>  {
-    List<User> users = new ArrayList<>();
+    private List<User> users = new ArrayList<>();
+
+    public Admin(String username, String email, int age) {
+        super(username, email, age);
+    }
+
     @Override
     public void addUser(User user) {
         users.add(user);

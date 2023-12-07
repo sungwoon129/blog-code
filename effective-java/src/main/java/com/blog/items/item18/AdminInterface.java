@@ -8,5 +8,4 @@ public interface AdminInterface<E> {
     User getUser(int idx);
     List<E> getAll();
     E getAdmin();
-
 }

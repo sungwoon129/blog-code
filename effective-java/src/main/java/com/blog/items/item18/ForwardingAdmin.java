@@ -1,6 +1,7 @@
 package com.blog.items.item18;
 
 import java.util.List;
+import java.util.Objects;
 
 public class ForwardingAdmin<E> implements AdminInterface<E> {
     private final AdminInterface<E> admin;
@@ -9,29 +10,43 @@ public class ForwardingAdmin<E> implements AdminInterface<E> {
         this.admin = admin;
     }
 
-    @Override
     public void addUser(User user) {
         admin.addUser(user);
 
     }
 
-    @Override
+
     public void removeUser(User user) {
         admin.removeUser(user);
     }
 
-    @Override
+
     public User getUser(int idx) {
         return admin.getUser(idx);
     }
 
-    @Override
+
     public List<E> getAll() {
         return admin.getAll();
     }
 
-    @Override
+
     public E getAdmin() {
         return admin.getAdmin();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        return admin.equals(o);
+    }
+
+    @Override
+    public int hashCode() {
+        return admin.hashCode();
+    }
+
+    @Override
+    public String toString() {
+        return admin.toString();
     }
 }
