@@ -24,3 +24,4 @@
 + [Garbage Collection 2(GC 종류)](https://github.com/sungwoon129/blog-code/tree/main/Garbage-Collection-2)
 + [Spring MVC - Pageable 최대 크기 제한](https://github.com/sungwoon129/blog-code/tree/main/Pageable-limit-maxsize)
 + [ThreadLocal](https://github.com/sungwoon129/blog-code/tree/main/ThreadLocal)
++ [Effective java](https://github.com/sungwoon129/blog-code/tree/main/effective-java)
