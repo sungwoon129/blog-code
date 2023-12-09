@@ -10,7 +10,7 @@ import com.blog.builder.TextBuilder;
 import com.blog.factory_method.AbstractFactory;
 import com.blog.factory_method.ConcreteFactory;
 import com.blog.factory_method.ProductInterface;
-import com.blog.façade.ComputerBody;
+import com.blog.facade.ComputerBody;
 import com.blog.prototype.annoymous.MessageBox;
 import com.blog.prototype.annoymous.UnderlinePen;
 import com.blog.prototype.framework.Manager;

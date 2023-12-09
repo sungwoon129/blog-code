@@ -1,4 +1,4 @@
-package com.blog.façade;
+package com.blog.facade;
 
 public class ComputerBody {
     private final CPU cpu;
