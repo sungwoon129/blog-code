@@ -10,6 +10,7 @@ import com.blog.builder.TextBuilder;
 import com.blog.factory_method.AbstractFactory;
 import com.blog.factory_method.ConcreteFactory;
 import com.blog.factory_method.ProductInterface;
+import com.blog.façade.ComputerBody;
 import com.blog.prototype.annoymous.MessageBox;
 import com.blog.prototype.annoymous.UnderlinePen;
 import com.blog.prototype.framework.Manager;
@@ -82,6 +83,10 @@ public class Main {
             String filename = htmlBuilder.getResult();
             System.out.println(filename + "가 작성되었습니다.");
         }
+
+        // 퍼사드 패턴
+        ComputerBody computer = new ComputerBody();
+        computer.startButton();
 
         System.out.println("instance1과 instance2 동일성 비교::"+ (instance1==instance2));
 
