@@ -7,6 +7,9 @@ import com.blog.adapter.HDMIPort;
 import com.blog.builder.Director;
 import com.blog.builder.HTMLBuilder;
 import com.blog.builder.TextBuilder;
+import com.blog.composit.Directory;
+import com.blog.composit.File;
+import com.blog.composit.FileTreatmentException;
 import com.blog.factory_method.AbstractFactory;
 import com.blog.factory_method.ConcreteFactory;
 import com.blog.factory_method.ProductInterface;
@@ -90,6 +93,38 @@ public class Main {
 
         System.out.println("instance1과 instance2 동일성 비교::"+ (instance1==instance2));
 
+
+        // 컴포짓 패턴
+        try {
+            System.out.println("Making root entries...");
+            Directory rootdir = new Directory("root");
+            Directory bindir = new Directory("bin");
+            Directory tmpdir = new Directory("tmp");
+            Directory usrdir = new Directory("usr");
+            rootdir.add(bindir);
+            rootdir.add(tmpdir);
+            rootdir.add(usrdir);
+            bindir.add(new File("vi", 10000));
+            bindir.add(new File("latex", 20000));
+            rootdir.printList();
+
+            System.out.println("");
+            System.out.println("Making user entries");
+            Directory kim = new Directory("Kim");
+            Directory Lee = new Directory("Lee");
+            Directory park = new Directory("Park");
+            usrdir.add(kim);
+            usrdir.add(Lee);
+            usrdir.add(park);
+            kim.add(new File("diary.html", 100));
+            kim.add(new File("Comosite.java", 200));
+            Lee.add(new File("memo.text", 300));
+            park.add(new File("game.doc", 400));
+            park.add(new File("junk.mail", 500));
+            rootdir.printList();
+        } catch (FileTreatmentException e) {
+            e.printStackTrace();
+        }
 
     }
 }
