@@ -1,6 +1,6 @@
 
 interface Student {
-    readonly studentId: number // readonly 속성을 통해 프로퍼티 값을 수정할 수 없음
+    readonly studentId: number
     age: number,
     name: string,
     gender?: string,

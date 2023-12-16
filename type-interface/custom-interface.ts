@@ -3,24 +3,40 @@ interface User {
     name: string;
   }
   
-  //변수에 활용한 인터페이스
+  // 타입처럼 사용하는 인터페이스
   const anyUser: User = {
-    age: 100,
-    name: '히밍',
+    age: 10,
+    name: '철수',
   }
-  
 
-  //함수의 인자를 정의하는 인터페이스
-function getUser(user: User) { // 인자의 데이터 타입을 제한하여 interface User의 데이터 구조만 인자로 받도록 함 
+// 파라미터의 타입을 정하는 것처럼 활용
+function getUser(user: User) {
     console.log(user);
   }
   const user1 = {
     name: '영희'
   }
   const user2 = {
-    age: 56,
+    age: 26,
     name: '철수'
   }
   
-  getUser(user2) // 문법 오류 없이 정상적으로 인자가 전달 됨
-  
+  getUser(user2)
+
+
+interface Window {
+  title: string
+}
+
+interface Window {
+  isOpen: boolean
+}
+
+// 같은 interface 명으로 Window를 다시 만든다면, 자동으로 확장이 된다.
+
+const customWindow: Window = {
+  title: "window",
+  isOpen: false
+}
+
+console.log(customWindow);
