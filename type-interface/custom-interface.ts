@@ -63,3 +63,18 @@ type FooTypeNumber = number
 
 // 불가능
 interface X extends string {}
+
+
+// computed value 의 사용
+type names = 'firstName' | 'lastName'
+
+type NameTypes = {
+  [key in names]: string
+}
+
+const yc: NameTypes = { firstName: 'hi', lastName: 'yc' }
+
+interface NameInterface {
+  // 인터페이스의 경우는 in 혹은 keyof 키워드를 통해 선언할 수 없다.
+  [key in names]: string
+}
