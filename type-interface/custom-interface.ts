@@ -39,4 +39,27 @@ const customWindow: Window = {
   isOpen: false
 }
 
-console.log(customWindow);
+
+// 동일한 이름의 Car type 선언할 수 없음.
+type Car {
+  name: string
+}
+
+type Car {
+  isOpen: boolean
+}
+
+// interface는 객체에만 사용할 수 있다.
+interface FooInterface {
+  value: string
+}
+
+type FooType = {
+  value: string
+}
+
+type FooOnlyString = string
+type FooTypeNumber = number
+
+// 불가능
+interface X extends string {}
