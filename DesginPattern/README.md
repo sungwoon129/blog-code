@@ -9,3 +9,5 @@
 + [빌더 패턴](https://github.com/sungwoon129/blog-code/tree/main/DesginPattern/src/main/java/com/blog/builder)
 + [퍼사드 패턴](https://github.com/sungwoon129/blog-code/tree/main/DesginPattern/src/main/java/com/blog/facade)
 + [컴포짓 패턴](https://github.com/sungwoon129/blog-code/tree/main/DesginPattern/src/main/java/com/blog/composit)
++ [플라이웨이트 패턴](https://github.com/sungwoon129/blog-code/tree/main/DesginPattern/src/main/java/com/blog/flyweight)
++ [데코레이터 패턴](https://github.com/sungwoon129/blog-code/tree/main/DesginPattern/src/main/java/com/blog/decorator)
