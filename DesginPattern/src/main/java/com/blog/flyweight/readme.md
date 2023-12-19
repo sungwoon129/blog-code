@@ -1,0 +1,1 @@
+## Flyweight 패턴 ##
