@@ -5,10 +5,10 @@ import java.util.EnumSet;
 public class Client {
     public void test() {
 
-        BadCase badTest = new BadCase();
+        BadText badTest = new BadText();
         badTest.applyStyles(3);
 
-        GoodCase text = new GoodCase();
-        text.applyStyles(EnumSet.of(GoodCase.Style.BOLD, GoodCase.Style.UNDERLINE));
+        GoodText text = new GoodText();
+        text.applyStyles(EnumSet.of(GoodText.Style.BOLD, GoodText.Style.UNDERLINE));
     }
 }

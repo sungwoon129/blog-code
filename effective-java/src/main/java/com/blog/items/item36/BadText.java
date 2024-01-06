@@ -1,7 +1,7 @@
 package com.blog.items.item36;
 
 
-public class BadCase {
+public class BadText {
 
     /**
      * 비트 필드
