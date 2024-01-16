@@ -30,19 +30,21 @@ public class SkeletonList {
     public List<Integer> intSeqArrayList(int[] a) {
         Objects.requireNonNull(a);
         return new AbstractSequentialList<>() {
-            @Override
-            public ListIterator<Integer> listIterator(int index) {
-                return listIterator(index);
-            }
 
+            @Override
             public Integer get(int index) {
                 ListIterator<Integer> i = listIterator(index);
 
                 try {
                     return i.next();
-                } catch (Exception e) {
+                } catch (NoSuchElementException e) {
                     throw new IndexOutOfBoundsException("인덱스 : " + index);
                 }
+            }
+
+            @Override
+            public ListIterator<Integer> listIterator(int index) {
+                return this.listIterator(index);
             }
 
             @Override
@@ -50,7 +52,5 @@ public class SkeletonList {
                 return a.length;
             }
         };
-
-
     }
 }
