@@ -8,3 +8,4 @@
 + [아이템 45](https://github.com/sungwoon129/blog-code/tree/main/effective-java/src/main/java/com/blog/items/item45)
 + [아이템 60](https://github.com/sungwoon129/blog-code/tree/main/effective-java/src/main/java/com/blog/items/item60)
 + [아이템 65](https://github.com/sungwoon129/blog-code/tree/main/effective-java/src/main/java/com/blog/items/item65)
++ [아이템 73](https://github.com/sungwoon129/blog-code/tree/main/effective-java/src/main/java/com/blog/items/item73)
